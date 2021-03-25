@@ -1,11 +1,7 @@
 package ua.kharkiv.syvolotskyi.controller.managment;
 
-import ua.kharkiv.syvolotskyi.controller.common.*;
 import ua.kharkiv.syvolotskyi.entity.Appointment;
-import ua.kharkiv.syvolotskyi.entity.Status;
-import ua.kharkiv.syvolotskyi.entity.User;
 import ua.kharkiv.syvolotskyi.service.AppointmentService;
-import ua.kharkiv.syvolotskyi.service.UserService;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -13,9 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 @WebServlet("/master/master-edit-appointment")
 public class EditAppointmentByMasterServlet extends HttpServlet {

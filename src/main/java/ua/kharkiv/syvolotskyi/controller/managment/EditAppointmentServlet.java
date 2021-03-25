@@ -1,9 +1,8 @@
 package ua.kharkiv.syvolotskyi.controller.managment;
 
-import ua.kharkiv.syvolotskyi.controller.common.ConverterUtils;
-import ua.kharkiv.syvolotskyi.controller.common.JspConstants;
+import ua.kharkiv.syvolotskyi.utils.ConverterUtils;
+import ua.kharkiv.syvolotskyi.utils.JspConstants;
 import ua.kharkiv.syvolotskyi.entity.Appointment;
-import ua.kharkiv.syvolotskyi.entity.User;
 import ua.kharkiv.syvolotskyi.service.AppointmentService;
 import ua.kharkiv.syvolotskyi.service.UserService;
 
@@ -13,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/admin/edit-appointment")

@@ -28,7 +28,7 @@
         </div>
         <table style="width: -webkit-fill-available;">
             <tr>
-                <th><fmt:message key="id"/></th>
+                <th></th>
                 <th><fmt:message key="serviceName"/></th>
                 <th><fmt:message key="serviceDuration"/></th>
                 <th><fmt:message key="servicePrice"/></th>
@@ -37,7 +37,7 @@
             </tr>
             <c:forEach var="service" items="${services}">
                 <tr>
-                    <td>${service.id}</td>
+                    <td></td>
                     <td>${service.name}</td>
                     <td>${service.serviceDuration}</td>
                     <td>${service.servicePrice}</td>
@@ -61,7 +61,7 @@
         </div>
         <table style="align-self: auto">
             <tr>
-                <th><fmt:message key="id"/></th>
+                <th></th>
                 <th><fmt:message key="masterName"/></th>
                 <th><fmt:message key="serviceName"/></th>
                 <th><fmt:message key="serviceDuration"/></th>
@@ -71,7 +71,7 @@
             </tr>
             <c:forEach var="catalog" items="${catalogs}">
                 <tr>
-                    <td>${catalog.id}</td>
+                    <td></td>
                     <td>${catalog.master.name}</td>
                     <td>${catalog.service.name}</td>
                     <td>${catalog.service.serviceDuration}</td>

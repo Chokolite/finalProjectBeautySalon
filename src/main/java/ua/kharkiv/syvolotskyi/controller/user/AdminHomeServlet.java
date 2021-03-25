@@ -1,7 +1,7 @@
 package ua.kharkiv.syvolotskyi.controller.user;
 
-import ua.kharkiv.syvolotskyi.controller.common.JspConstants;
-import ua.kharkiv.syvolotskyi.controller.common.PaginationUtils;
+import ua.kharkiv.syvolotskyi.utils.JspConstants;
+import ua.kharkiv.syvolotskyi.utils.PaginationUtils;
 import ua.kharkiv.syvolotskyi.entity.Appointment;
 import ua.kharkiv.syvolotskyi.entity.Catalog;
 import ua.kharkiv.syvolotskyi.entity.Service;

@@ -1,6 +1,6 @@
 package ua.kharkiv.syvolotskyi.controller.managment;
 
-import ua.kharkiv.syvolotskyi.controller.common.ConverterUtils;
+import ua.kharkiv.syvolotskyi.utils.ConverterUtils;
 import ua.kharkiv.syvolotskyi.entity.Role;
 import ua.kharkiv.syvolotskyi.entity.User;
 import ua.kharkiv.syvolotskyi.service.CatalogService;

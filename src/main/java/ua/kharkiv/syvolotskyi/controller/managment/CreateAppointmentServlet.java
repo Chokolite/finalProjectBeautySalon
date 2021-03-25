@@ -1,8 +1,8 @@
 package ua.kharkiv.syvolotskyi.controller.managment;
 
-import ua.kharkiv.syvolotskyi.controller.common.ConverterUtils;
-import ua.kharkiv.syvolotskyi.controller.common.JspConstants;
-import ua.kharkiv.syvolotskyi.controller.common.TimeSlots;
+import ua.kharkiv.syvolotskyi.utils.ConverterUtils;
+import ua.kharkiv.syvolotskyi.utils.JspConstants;
+import ua.kharkiv.syvolotskyi.utils.TimeSlots;
 import ua.kharkiv.syvolotskyi.entity.Appointment;
 import ua.kharkiv.syvolotskyi.entity.Role;
 import ua.kharkiv.syvolotskyi.entity.User;

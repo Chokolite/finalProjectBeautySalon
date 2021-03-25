@@ -1,4 +1,4 @@
-package ua.kharkiv.syvolotskyi.controller.common;
+package ua.kharkiv.syvolotskyi.utils;
 
 import org.apache.commons.lang3.StringUtils;
 

@@ -1,7 +1,7 @@
 package ua.kharkiv.syvolotskyi.controller.auth;
 
-import ua.kharkiv.syvolotskyi.controller.common.JspConstants;
-import ua.kharkiv.syvolotskyi.controller.common.PasswordEncoder;
+import ua.kharkiv.syvolotskyi.utils.JspConstants;
+import ua.kharkiv.syvolotskyi.utils.PasswordEncoder;
 import ua.kharkiv.syvolotskyi.entity.Role;
 import ua.kharkiv.syvolotskyi.entity.User;
 import ua.kharkiv.syvolotskyi.exception.ValidationEnum;

@@ -1,7 +1,7 @@
 package ua.kharkiv.syvolotskyi.controller.managment;
 
-import ua.kharkiv.syvolotskyi.controller.common.ConverterUtils;
-import ua.kharkiv.syvolotskyi.controller.common.JspConstants;
+import ua.kharkiv.syvolotskyi.utils.ConverterUtils;
+import ua.kharkiv.syvolotskyi.utils.JspConstants;
 import ua.kharkiv.syvolotskyi.service.ServiceService;
 
 import javax.servlet.ServletConfig;

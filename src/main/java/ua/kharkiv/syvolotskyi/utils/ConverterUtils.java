@@ -1,4 +1,4 @@
-package ua.kharkiv.syvolotskyi.controller.common;
+package ua.kharkiv.syvolotskyi.utils;
 
 import ua.kharkiv.syvolotskyi.entity.*;
 import ua.kharkiv.syvolotskyi.exception.ValidationEnum;

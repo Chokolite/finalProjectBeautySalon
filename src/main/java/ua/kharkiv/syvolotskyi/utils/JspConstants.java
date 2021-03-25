@@ -1,4 +1,4 @@
-package ua.kharkiv.syvolotskyi.controller.common;
+package ua.kharkiv.syvolotskyi.utils;
 
 public class JspConstants {
 

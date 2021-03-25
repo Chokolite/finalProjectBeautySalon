@@ -1,8 +1,8 @@
 package ua.kharkiv.syvolotskyi.config;
 
 import org.apache.log4j.Logger;
-import ua.kharkiv.syvolotskyi.controller.common.EmailScheduler;
-import ua.kharkiv.syvolotskyi.controller.common.EmailSender;
+import ua.kharkiv.syvolotskyi.utils.EmailScheduler;
+import ua.kharkiv.syvolotskyi.utils.EmailSender;
 import ua.kharkiv.syvolotskyi.repository.*;
 import ua.kharkiv.syvolotskyi.repository.impl.*;
 import ua.kharkiv.syvolotskyi.service.*;
