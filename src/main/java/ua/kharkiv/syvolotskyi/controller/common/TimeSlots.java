@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class TimeSlots {
     private Long masterId;
-    private LocalDateTime startTime = changeHour(LocalDateTime.now(), 9, 0);
+    private LocalDateTime startTime = changeHour(LocalDateTime.now(), 10, 0);
     private List<Appointment> appointmentListByMasterId = new ArrayList<>();
     private LocalDateTime finishHour = changeHour(startTime, 20, 0);
     private LocalDateTime finishDay = startTime.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
