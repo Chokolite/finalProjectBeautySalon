@@ -59,7 +59,7 @@
         <div style="display:block; text-align:center; ">
             <span><fmt:message key="catalog"/></span>
         </div>
-        <table style="width: -webkit-fill-available;">
+        <table style="align-self: auto">
             <tr>
                 <th><fmt:message key="id"/></th>
                 <th><fmt:message key="masterName"/></th>
@@ -96,25 +96,10 @@
             <table style="width: -webkit-fill-available;">
                 <c:forEach var="slot" items="${shelude}">
                     <tr>
-                        <td/>
-                        <td/>
-                        <td/>
-                        <td/>
-                        <td/>
-                        <th>
-                            <fmt:parseDate value="${slot.key}" pattern="yyyy-MM-dd'T'HH:mm"
+                        <td><fmt:parseDate value="${slot.key}" pattern="yyyy-MM-dd'T'HH:mm"
                                            var="parsedDateTime"
                                            type="both"/>
-                            <fmt:formatDate pattern="dd.MM.yyyy" value="${parsedDateTime}"/>
-                        </th>
-                        <td/>
-                        <td/>
-                        <td/>
-                        <td/>
-                        <td/>
-                        <td/>
-                    </tr>
-                    <tr>
+                            <fmt:formatDate pattern="dd.MM.yyyy" value="${parsedDateTime}"/></td>
                         <c:forEach var="slotValue" items="${slot.value}">
                             <c:choose>
                                 <c:when test="${slotValue.value eq true}">
