@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+    <display-name>Archetype Created Web Application</display-name>
+
+    <error-page>
+        <location>/WEB-INF/jsp/error-page.jsp</location>
+    </error-page>
+
+    <welcome-file-list>
+        <welcome-file>/WEB-INF/jsp/login.jsp</welcome-file>
+    </welcome-file-list>
+
+    <listener>
+        <listener-class>ua.kharkiv.syvolotskyi.config.ApplicationContextListener</listener-class>
+    </listener>
+
+    <filter>
+        <filter-name>ExceptionFilter</filter-name>
+        <filter-class>ua.kharkiv.syvolotskyi.filter.ExceptionFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>ExceptionFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>ua.kharkiv.syvolotskyi.filter.EncodingFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>ValidationFilter</filter-name>
+        <filter-class>ua.kharkiv.syvolotskyi.filter.ValidationFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>ValidationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>LocaleFilter</filter-name>
+        <filter-class>ua.kharkiv.syvolotskyi.filter.LocaleFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>LocaleFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>SecurityFilter</filter-name>
+        <filter-class>ua.kharkiv.syvolotskyi.filter.SecurityFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>SecurityFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <resource-ref>
+        <res-ref-name>jdbc/mydb</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+
+</web-app>
