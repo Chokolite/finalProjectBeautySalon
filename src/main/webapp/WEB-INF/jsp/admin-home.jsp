@@ -126,10 +126,9 @@
                         <td>${service.servicePrice}</td>
                         <td></td>
                         <td>
-                            <a type="submit" name="check"create-catalog?serviceId=${service.id}&masterId=${user.id}';
-                               onclick="window.location='/admin/
-                                       return false"
-                               id="edit">
+                            <a type="submit" name="check"
+                               onclick="window.location='/admin/create-catalog?serviceId=${service.id}&masterId=${user.id}';
+                                       return false" id="edit">
                                 <i class="fa fa-check" aria-hidden="true"></i>
                             </a>
                         </td>

@@ -112,7 +112,7 @@
                                     <c:if test="${slotValue.key eq appointment.localDateTime}">
                                 <td> Busy slot:
                                     <a type="submit" name="settings"
-                                       onclick="window.location='/master/master-edit-appointment?appointmentId=${appointment.id}&role=${user.role}'" id="edit">
+                                       onclick="window.location='/master/master-edit-appointment?appointmentId=${appointment.id}&appointmentStatus=${appointment.status}&role=${user.role}'" id="edit">
                                         <button name="dateTime"> <fmt:parseDate value="${ slotValue.key }"
                                                                     pattern="yyyy-MM-dd'T'HH:mm"
                                                                     var="parsedDateTime" type="both"/>
@@ -139,6 +139,7 @@
                 </tbody>
             </c:forEach>
         </table>
+            <hr>
         </div>
     </div>
     </body>
