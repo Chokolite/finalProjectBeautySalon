@@ -2,10 +2,7 @@ package ua.kharkiv.syvolotskyi.controller.managment;
 
 import ua.kharkiv.syvolotskyi.controller.common.ConverterUtils;
 import ua.kharkiv.syvolotskyi.controller.common.JspConstants;
-import ua.kharkiv.syvolotskyi.controller.common.SendMail;
 import ua.kharkiv.syvolotskyi.entity.Appointment;
-import ua.kharkiv.syvolotskyi.entity.Role;
-import ua.kharkiv.syvolotskyi.entity.Status;
 import ua.kharkiv.syvolotskyi.entity.User;
 import ua.kharkiv.syvolotskyi.service.AppointmentService;
 import ua.kharkiv.syvolotskyi.service.UserService;
@@ -18,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 @WebServlet("/admin/edit-appointment")
 public class EditAppointmentServlet extends HttpServlet {
@@ -40,11 +36,8 @@ public class EditAppointmentServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
         Appointment appointment = ConverterUtils.convertRequestToAppointment(request);
-
-
-            response.sendRedirect("/admin/admin-home");
+        appointmentService.update(appointment);
+        response.sendRedirect("/admin/admin-home");
     }
 }

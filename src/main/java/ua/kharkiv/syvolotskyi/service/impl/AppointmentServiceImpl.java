@@ -35,6 +35,12 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
+    public List<String> getUsersEmailsForSheduler() {
+        return transactionManager.execute(c ->
+                appointmentRepository.getUsersEmailsForSheduler(c));
+    }
+
+    @Override
     public Appointment getById(Long id) {
         return transactionManager.execute(c -> appointmentRepository.getById(c, id));
     }

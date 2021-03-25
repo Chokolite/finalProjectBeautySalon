@@ -1,6 +1,8 @@
 package ua.kharkiv.syvolotskyi.config;
 
 import org.apache.log4j.Logger;
+import ua.kharkiv.syvolotskyi.controller.common.EmailScheduler;
+import ua.kharkiv.syvolotskyi.controller.common.EmailSender;
 import ua.kharkiv.syvolotskyi.repository.*;
 import ua.kharkiv.syvolotskyi.repository.impl.*;
 import ua.kharkiv.syvolotskyi.service.*;
@@ -41,6 +43,7 @@ public class ApplicationContextListener implements ServletContextListener {
         AppointmentService appointmentService = new AppointmentServiceImpl(transactionManager, appointmentRepository);
         ReviewRepository reviewRepository = new ReviewRepositoryImpl();
         ReviewService reviewService = new ReviewServiceImpl(transactionManager, reviewRepository);
+        EmailScheduler emailScheduler = new EmailScheduler(new EmailSender(appointmentService.getUsersEmailsForSheduler()));
 
 
         context.setAttribute(UserService.class.toString(), userService);
@@ -48,6 +51,7 @@ public class ApplicationContextListener implements ServletContextListener {
         context.setAttribute(CatalogService.class.toString(), catalogService);
         context.setAttribute(AppointmentService.class.toString(), appointmentService);
         context.setAttribute(ReviewService.class.toString(), reviewService);
+        emailScheduler.startScheduler();
     }
 
     private TransactionManager initTransactionManager() {

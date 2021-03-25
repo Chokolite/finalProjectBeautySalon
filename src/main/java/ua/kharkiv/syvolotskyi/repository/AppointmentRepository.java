@@ -19,4 +19,6 @@ public interface AppointmentRepository {
     void delete(Connection connection, Long id) throws SQLException;
 
     void update(Connection connection, Appointment appointment) throws SQLException;
+
+    List<String> getUsersEmailsForSheduler(Connection connection) throws SQLException;
 }

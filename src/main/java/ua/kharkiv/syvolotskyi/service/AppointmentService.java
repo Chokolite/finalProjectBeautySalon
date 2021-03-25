@@ -16,4 +16,6 @@ public interface AppointmentService {
     void update(Appointment appointment);
 
     void saveReview(Long appointmentId, Long reviewId);
+
+    List<String> getUsersEmailsForSheduler();
 }

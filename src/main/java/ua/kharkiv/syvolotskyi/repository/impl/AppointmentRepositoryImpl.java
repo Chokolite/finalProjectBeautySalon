@@ -31,6 +31,13 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
     private static final String DELETE_APPOINTMENT = "delete from appointment where id=?";
     private static final String UPDATE_APPOINTMENT = "update appointment set customerId=?, catalogId=?, appointmentDate=?, " +
             "status=? where id=?";
+    private static final String GET_USERS_EMAILS_FOR_SHELUDER = "select u.email " +
+            " from users u, " +
+            "     (select customerId " +
+            "      from appointment " +
+            "      where DAYOFWEEK(appointmentDate) = DAYOFWEEK(subdate(NOW(), 1)) " +
+            "        and status = 'COMPLETE') as uid " +
+            " where u.id = uid.customerId";
 
     @Override
     public List<Appointment> getAll(Connection connection) throws SQLException {
@@ -78,6 +85,17 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
         PreparedStatement statement = connection.prepareStatement(UPDATE_APPOINTMENT);
         setAttributeForUpdate(appointment, statement);
         statement.executeUpdate();
+    }
+
+    @Override
+    public List<String> getUsersEmailsForSheduler(Connection connection) throws SQLException {
+        List<String> email = new ArrayList<>();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(GET_USERS_EMAILS_FOR_SHELUDER);
+        while (resultSet.next()){
+            email.add(resultSet.getString("email"));
+        }
+        return email;
     }
 
     private Appointment convertResultSetToAppointment(ResultSet resultSet) throws SQLException {

@@ -2,9 +2,6 @@ package ua.kharkiv.syvolotskyi.controller.managment;
 
 import ua.kharkiv.syvolotskyi.controller.common.ConverterUtils;
 import ua.kharkiv.syvolotskyi.controller.common.JspConstants;
-import ua.kharkiv.syvolotskyi.controller.common.SendMail;
-import ua.kharkiv.syvolotskyi.entity.Appointment;
-import ua.kharkiv.syvolotskyi.entity.User;
 import ua.kharkiv.syvolotskyi.service.AppointmentService;
 import ua.kharkiv.syvolotskyi.service.ReviewService;
 import ua.kharkiv.syvolotskyi.service.UserService;
@@ -16,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 @WebServlet(urlPatterns = {"/client/create-review"})
 public class CreateReviewServlet extends HttpServlet {
@@ -39,7 +35,6 @@ public class CreateReviewServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Long reviewId = reviewService.save(ConverterUtils.convertRequestToReview(request));
         appointmentService.saveReview(Long.valueOf(request.getParameter("appointmentId")), reviewId);
-
         response.sendRedirect("/client/client-home");
     }
 }
