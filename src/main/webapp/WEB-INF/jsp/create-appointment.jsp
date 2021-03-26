@@ -11,7 +11,7 @@
                 <i class="fas fa-arrow-circle-left"></i>
             </a>
             <p>
-            <span><fmt:message key="chooseFreeTimeSlot"/></span>
+            <div class="flex-item"><span><fmt:message key="chooseFreeTimeSlot"/></span></div>
             </p>
         </div>
         <form action="/${param.role.toLowerCase()}/create-appointment" method="post">
@@ -23,7 +23,7 @@
             <div class="flex-container wrap" action="/master/edit-appointment" method="post">
                 <c:forEach var="slot" items="${shelude}">
                     <div class="table-flex">
-                        <div class="flex-item">
+                        <div class="flex-item table-tr">
                             <fmt:parseDate value="${slot.key}" pattern="yyyy-MM-dd'T'HH:mm"
                                            var="parsedDateTime"
                                            type="both"/>
