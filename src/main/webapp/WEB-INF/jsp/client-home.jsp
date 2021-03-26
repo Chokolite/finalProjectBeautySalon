@@ -137,7 +137,7 @@
                         <div class="flex-item">${appointment.status}</div>
                         <div class="flex-item">
                             <c:if test="${appointment.status eq 'COMPLETE'}">
-                                <c:if test="${appointment.reviewId > 0}">
+                                <c:if test="${appointment.reviewId < 1}">
                                     <a type="submit" name="check"
                                        onclick="window.location='/client/create-review?appointmentId=${appointment.id}&clientId=${user.id}';
                                                return false"
