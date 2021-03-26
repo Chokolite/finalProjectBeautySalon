@@ -100,10 +100,11 @@
                         <div class="flex-item">${catalog.service.serviceDuration}</div>
                         <div class="flex-item">${catalog.service.servicePrice}</div>
                         <div class="flex-item">
-                            <a type="submit" name="delete"
-                               onclick="window.location='/master/delete-catalog?id=${catalog.id}&role=${user.role}'"
+                            <a type="submit" name="check"
+                               onclick="window.location='/client/create-appointment?catalogId=${catalog.id}&clientId=${user.id}&serviceName=${catalog.service.name}&role=${user.role}';
+                                       return false"
                                id="edit">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                <i class="fa fa-check" aria-hidden="true"></i>
                             </a>
                         </div>
                     </div>
