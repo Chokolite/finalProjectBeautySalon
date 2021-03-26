@@ -145,7 +145,6 @@
             <div class="flex-item header">
                 <span><fmt:message key="shelude"/></span>
             </div>
-        </div>
         <div class="flex-container wrap" action="/master/edit-appointment" method="post">
             <c:forEach var="slot" items="${shelude}">
                 <div class="table-flex">
@@ -191,6 +190,7 @@
                     </div>
                 </div>
             </c:forEach>
+        </div>
         </div>
     </div>
 </div>

@@ -19,9 +19,9 @@
         <span><fmt:message key="acctype"/>: ${user.role}</span><br>
     </div>
     <div id="users" class="tableInfo">
-            <div class="table-flex">
-                <div class="flex-item header"><span><fmt:message key="users"/><a href="/admin/create-user" id="add"><i
-                        class="fas fa-plus-circle"></i></a></span></div>
+        <div class="table-flex">
+            <div class="flex-item header"><span><fmt:message key="users"/><a href="/admin/create-user" id="add"><i
+                    class="fas fa-plus-circle"></i></a></span></div>
             <div class="flex-container wrap">
                 <div class="table-flex">
                     <div class="flex-container table-tr">
@@ -125,18 +125,13 @@
                                    id="edit">
                                     <i class="fa fa-check" aria-hidden="true"></i>
                                 </a>
-                                <a type="submit" name="settings"
-                                   onclick="window.location='/admin/edit-service?id=${service.id}'"
-                                   id="edit">
-                                    <i class="fa fa-cog" aria-hidden="true"></i>
-                                </a>
                                 <a type="submit" name="delete"
                                    onclick="window.location='/admin/delete-service?id=${service.id}'"
                                    id="edit">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
-                                </a></div>
+                                </a>
+                            </div>
                         </div>
-
                     </c:forEach>
                 </div>
             </div>
@@ -210,7 +205,8 @@
                     <div class="flex-container table-tr">
                         <div class="flex-item"><a href="<c:out value="${sortName}"/>"/><fmt:message
                                 key="masterName"/></a></div>
-                        <div class="flex-item"><a href="<c:out value="${sortRating}"/>"/><fmt:message key="rating"/></a></div>
+                        <div class="flex-item"><a href="<c:out value="${sortRating}"/>"/><fmt:message key="rating"/></a>
+                        </div>
                         <div class="flex-item"><fmt:message key="serviceName"/></div>
                         <div class="flex-item"><fmt:message key="serviceDuration"/></div>
                         <div class="flex-item"><fmt:message key="servicePrice"/></div>
