@@ -140,7 +140,9 @@ p {
     border-radius: 10px;
     background-color: #3f4950;
     display: inline-block;
-    width: -webkit-fill-available;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 #user_info span {
