@@ -168,7 +168,7 @@
                            placeholder="<fmt:message key="size"/>">
                 </form>
                 <table style="width: -webkit-fill-available;">
-                    <c:url value="/master/master-home" var="sortName">
+                    <c:url value="/admin/admin-home" var="sortName">
                         <c:set var="ascDesc" value="DESC"/>
                     <c:choose>
                     <c:when test="${param.order == 'u.name,ASC'}">
@@ -184,7 +184,7 @@
                     </c:if>
                     </c:url>
 
-                    <c:url value="/master/master-home" var="sortRating">
+                    <c:url value="/admin/admin-home" var="sortRating">
                         <c:set var="ascDesc" value="ASC"/>
                     <c:choose>
                     <c:when test="${param.order == 'avg_rating,ASC'}">

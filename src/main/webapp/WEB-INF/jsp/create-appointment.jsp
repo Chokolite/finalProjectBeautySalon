@@ -20,7 +20,7 @@
                    value="${param.serviceName}" required>
             <input type="hidden" name="catalogId" value="${param.catalogId}"/>
             <input type="hidden" name="clientId" value="${param.clientId}"/>
-            <div class="flex-container wrap" action="/master/edit-appointment" method="post">
+            <div class="flex-container wrap" action="/client/create-appointment" method="post">
                 <c:forEach var="slot" items="${shelude}">
                     <div class="table-flex">
                         <div class="flex-item table-tr">
@@ -35,7 +35,6 @@
                                     <c:when test="${slotValue.value eq true}">
                                         <c:forEach var="appointment" items="${appointments}">
                                             <c:if test="${slotValue.key eq appointment.localDateTime}">
-
                                                 <div class="flex-item busy">
                                                     <fmt:parseDate
                                                             value="${ slotValue.key }"
@@ -50,9 +49,7 @@
                                         </c:forEach>
                                     </c:when>
                                     <c:when test="${slotValue.value eq false}">
-                                        <a type="submit" name="settings"
-                                           onclick="window.location='/master/master-edit-appointment?appointmentId=${appointment.id}&appointmentStatus=${appointment.status}&role=${user.role}'"
-                                           id="edit">
+
                                             <div class="flex-item free">
                                                 <button class="btn-link" name="dateTime" value="${slotValue.key}"
                                                         type="submit">
@@ -62,7 +59,6 @@
                                                     <fmt:formatDate pattern="HH:mm"
                                                                     value="${ parsedDateTime }"/></button>
                                             </div>
-                                        </a>
 
                                     </c:when>
                                 </c:choose>

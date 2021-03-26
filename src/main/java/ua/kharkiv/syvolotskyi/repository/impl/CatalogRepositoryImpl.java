@@ -20,9 +20,12 @@ public class CatalogRepositoryImpl implements CatalogRepository {
             "s.serviceDuration     s_serviceDuration, " +
             "s.servicePrice        s_servicePrice, " +
             "u.name                u_name, " +
-            "(select avg(a.reviewId) " +
+            "(select avg(r.rating) " +
             "from appointment a " +
-            "join catalog c on a.catalogId = c.id where c.masterId = u.id group by c.masterId) avg_rating " +
+            "    join review r on a.reviewId = r.id " +
+            "         join catalog c on a.catalogId = c.id " +
+            "where c.masterId = u.id " +
+            "group by c.masterId) avg_rating " +
             "from catalog c, users u, service s where c.masterId = u.id and c.serviceId = s.id ";
     private static final String SELECT_CATALOG_BY_ID = SELECT_ALL + " and c.id=?";
     private static final String INSERT_CATALOG = "insert into catalog (masterId, serviceId) values(?, ?)";
