@@ -17,74 +17,89 @@
         <hr>
     </div>
     <div id="users" class="tableInfo">
-        <hr>
-        <div style="display:block; text-align:center; ">
-            <span><fmt:message key="catalog"/></span>
-        </div>
-        <form id="subSearch">
-            <c:if test="${param.order != null}">
-                <input type="hidden" name="order" value="${param.order}">
-            </c:if>
-            <input type="text" name="name" value="${param.masterName}" placeholder="<fmt:message key="masterName"/>">
-            <select itemtype="text" name="type" size="1">
-                <option value="masterName"><fmt:message key="masterName"/></option>
-                <option value="serviceName"><fmt:message key="serviceName"/></option>
-            </select>
-        </form>
-        <table style="width: -webkit-fill-available;">
-            <c:url value="/guest/guest-home" var="sortName">
-                <c:set var="ascDesc" value="DESC"/>
+        <div class="table-flex">
+            <div class="flex-item header">
+                <span><fmt:message key="catalog"/></span>
+            </div>
+            <form id="subSearch">
+                <c:if test="${param.order != null}">
+                    <input type="hidden" name="order" value="${param.order}">
+                </c:if>
+                <c:if test="${param.size != null}">
+                    <input type="hidden" name="size" value="${param.size}">
+                </c:if>
+                <input type="text" name="name" value="${param.masterName}" placeholder="<fmt:message key="search"/>">
+                <select itemtype="text" name="type" size="1">
+                    <option value="masterName"><fmt:message key="masterName"/></option>
+                    <option value="serviceName"><fmt:message key="serviceName"/></option>
+                </select>
+            </form>
+            <form id="pageSize">
+                <c:if test="${param.name != null}">
+                    <input type="hidden" name="name" value="${param.name}">
+                </c:if>
+                <c:if test="${param.order != null}">
+                    <input type="hidden" name="order" value="${param.order}">
+                </c:if>
+                <c:if test="${param.type != null}">
+                    <input type="hidden" name="type" value="${param.type}">
+                </c:if>
+                <input type="number" name="size" value="${param.size}" min="1" placeholder="<fmt:message key="size"/>">
+            </form>
+            <table style="width: -webkit-fill-available;">
+                <c:url value="/guest/guest-home" var="sortName">
+                    <c:set var="ascDesc" value="DESC"/>
                 <c:choose>
-                    <c:when test="${param.order == 'u.name,ASC'}">
-                        <c:set var="ascDesc" value="DESC"/>
-                    </c:when>
-                    <c:when test="${param.order == 'u.name,DESC'}">
-                        <c:set var="ascDesc" value="ASC"/>
-                    </c:when>
+                <c:when test="${param.order == 'u.name,ASC'}">
+                    <c:set var="ascDesc" value="DESC"/>
+                </c:when>
+                <c:when test="${param.order == 'u.name,DESC'}">
+                    <c:set var="ascDesc" value="ASC"/>
+                </c:when>
                 </c:choose>
-                <c:param name="order" value="u.name,${ascDesc}"/>
+                    <c:param name="order" value="u.name,${ascDesc}"/>
                 <c:if test="${catalog.master.name != null}">
                     <c:param name="masterName" value="${catalog.master.name}"/>
                 </c:if>
-            </c:url>
+                </c:url>
 
-            <c:url value="/guest/guest-home" var="sortRating">
-                <c:set var="ascDesc" value="ASC"/>
+                <c:url value="/guest/guest-home" var="sortRating">
+                    <c:set var="ascDesc" value="ASC"/>
                 <c:choose>
-                    <c:when test="${param.order == 'avg_rating,ASC'}">
-                        <c:set var="ascDesc" value="DESC"/>
-                    </c:when>
-                    <c:when test="${param.order == 'avg_rating,DESC'}">
-                        <c:set var="ascDesc" value="ASC"/>
-                    </c:when>
+                <c:when test="${param.order == 'avg_rating,ASC'}">
+                    <c:set var="ascDesc" value="DESC"/>
+                </c:when>
+                <c:when test="${param.order == 'avg_rating,DESC'}">
+                    <c:set var="ascDesc" value="ASC"/>
+                </c:when>
                 </c:choose>
-                <c:param name="order" value="avg_rating,${ascDesc}"/>
-                <c:if test="${param.subjectName != null}">
+                    <c:param name="order" value="avg_rating,${ascDesc}"/>
+                <c:if test="${param.masterName != null}">
                     <c:param name="masterName" value="${catalog.master.name}"/>
                 </c:if>
-            </c:url>
-
-            <tr>
-                <th><fmt:message key="id"/></th>
-                <th><a href="<c:out value="${sortName}"/>"/> <fmt:message key="masterName"/></th>
-                <th><a href="<c:out value="${sortRating}"/>" /> <fmt:message key="rating"/> </th>
-                <th><fmt:message key="serviceName"/></th>
-                <th><fmt:message key="serviceDuration"/></th>
-                <th><fmt:message key="servicePrice"/></th>
-                <th></th>
-            </tr>
-            <c:forEach var="catalog" items="${catalogs}">
-                <tr>
-                    <td>${catalog.id}</td>
-                    <td>${catalog.master.name}</td>
-                    <td>${catalog.master.rating}</td>
-                    <td>${catalog.service.name}</td>
-                    <td>${catalog.service.serviceDuration}</td>
-                    <td>${catalog.service.servicePrice}</td>
-                </tr>
-            </c:forEach>
-        </table>
-        <hr>
+                </c:url>
+        </div>
+        <div class="flex-container wrap">
+            <div class="table-flex">
+                <div class="flex-container table-tr">
+                    <div class="flex-item"><a href="<c:out value="${sortName}"/>"/><fmt:message key="masterName"/></a>
+                    </div>
+                    <div class="flex-item"><a href="<c:out value="${sortRating}"/>"/><fmt:message
+                            key="serviceName"/></a>
+                    </div>
+                    <div class="flex-item"><fmt:message key="serviceDuration"/></div>
+                    <div class="flex-item"><fmt:message key="servicePrice"/></div>
+                </div>
+                <c:forEach var="catalog" items="${catalogs}">
+                    <div class="flex-container wrap">
+                        <div class="flex-item">${catalog.master.name}</div>
+                        <div class="flex-item">${catalog.service.name}</div>
+                        <div class="flex-item">${catalog.service.serviceDuration}</div>
+                        <div class="flex-item">${catalog.service.servicePrice}</div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
     </div>
     </body>
     </html>
