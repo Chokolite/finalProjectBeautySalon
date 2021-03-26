@@ -73,9 +73,7 @@ public class TimeSlots {
         for (Appointment al : appointmentList) {
             for (; currentHour.getHour() <= finishHour.getHour(); currentHour = currentHour.plusHours(1)) {
                 if (currentHour.getHour() == al.getLocalDateTime().getHour() && currentHour.getDayOfMonth() == al.getLocalDateTime().getDayOfMonth()) {
-                    if(al.getStatus().equals(Status.COMPLETE)){
-                        sheludeOfDay.put(currentHour, false);
-                    }
+                        sheludeOfDay.put(currentHour, true);
                 }
             }
             currentHour = originCurrentHour;
