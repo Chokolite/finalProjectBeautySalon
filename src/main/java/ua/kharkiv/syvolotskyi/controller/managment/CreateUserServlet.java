@@ -1,5 +1,7 @@
 package ua.kharkiv.syvolotskyi.controller.managment;
 
+import ua.kharkiv.syvolotskyi.exception.ValidationEnum;
+import ua.kharkiv.syvolotskyi.exception.ValidationException;
 import ua.kharkiv.syvolotskyi.utils.ConverterUtils;
 import ua.kharkiv.syvolotskyi.utils.JspConstants;
 import ua.kharkiv.syvolotskyi.entity.Role;
@@ -31,6 +33,9 @@ public class CreateUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Role role = Role.valueOf(request.getParameter("role"));
+        if (userService.existsByEmail(request.getParameter("email"))) {
+            ValidationException.builder().put("emailError", ValidationEnum.EMAIL_EXISTS).throwIfErrorExists();
+        }
         if(Role.CLIENT.equals(role)){
             userService.save(ConverterUtils.convertRequestToClient(request));
         }

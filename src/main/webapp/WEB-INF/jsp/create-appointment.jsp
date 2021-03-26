@@ -14,7 +14,7 @@
             <div class="flex-item"><span><fmt:message key="chooseFreeTimeSlot"/></span></div>
             </p>
         </div>
-        <form action="/${param.role.toLowerCase()}/create-appointment" method="post">
+        <form id="createAppointment" action="/${param.role.toLowerCase()}/create-appointment" method="post">
 
             <input type="hidden" name="serviceName"
                    value="${param.serviceName}" required>
@@ -36,6 +36,7 @@
                                         <c:forEach var="appointment" items="${appointments}">
                                             <c:if test="${slotValue.key eq appointment.localDateTime}">
                                                 <div class="flex-item busy">
+                                                    <span class="tooltiptext">busy</span>
                                                     <fmt:parseDate
                                                             value="${ slotValue.key }"
                                                             pattern="yyyy-MM-dd'T'HH:mm"
@@ -50,15 +51,19 @@
                                     </c:when>
                                     <c:when test="${slotValue.value eq false}">
 
-                                            <div class="flex-item free">
-                                                <button class="btn-link" name="dateTime" value="${slotValue.key}"
-                                                        type="submit">
-                                                    <fmt:parseDate value="${ slotValue.key }"
-                                                                   pattern="yyyy-MM-dd'T'HH:mm"
-                                                                   var="parsedDateTime" type="both"/>
-                                                    <fmt:formatDate pattern="HH:mm"
-                                                                    value="${ parsedDateTime }"/></button>
-                                            </div>
+                                        <div class="flex-item free">
+
+                                                <span class="tooltiptext">
+                                                    <button class="btn-link" name="dateTime" value="${slotValue.key}" type="submit">
+                                                        free
+                                                    </button>
+                                                </span>
+                                                <fmt:parseDate value="${ slotValue.key }"
+                                                               pattern="yyyy-MM-dd'T'HH:mm"
+                                                               var="parsedDateTime" type="both"/>
+                                                <fmt:formatDate pattern="HH:mm"
+                                                                value="${ parsedDateTime }"/>
+                                        </div>
 
                                     </c:when>
                                 </c:choose>

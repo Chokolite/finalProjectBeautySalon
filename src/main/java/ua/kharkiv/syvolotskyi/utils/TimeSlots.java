@@ -16,7 +16,7 @@ public class TimeSlots {
     private LocalDateTime startTime = changeHour(LocalDateTime.now(), 9, 0);
     private List<Appointment> appointmentListByMasterId = new ArrayList<>();
     private LocalDateTime finishHour = changeHour(startTime, 20, 0);
-    private LocalDateTime finishDay = startTime.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
+    private LocalDateTime finishDay = startTime.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
     //Створити мапу Map<Дата, Map<час, Boolean>> map. Дата = день. Час - заповнити годинами починаючи з поточного часу і до finishTime
     private Map<LocalDateTime, Map<LocalDateTime, Boolean>> shelude = new LinkedHashMap<>();
     private List<Appointment> appointmentList;

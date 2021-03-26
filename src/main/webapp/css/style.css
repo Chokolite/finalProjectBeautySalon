@@ -402,8 +402,43 @@ img {
     text-decoration-color: #3b4148;
 }
 
+
+.free .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+.free:hover .tooltiptext {
+    visibility: visible;
+}
+
 .busy{
     background: #ffb8b8;
+}
+
+.busy .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+.busy:hover .tooltiptext {
+    visibility: visible;
 }
 .table-flex{
     display: flex;
@@ -426,7 +461,7 @@ img {
     outline: none;
     background: none;
     cursor: pointer;
-    color: #3b4148;
+    color: #ffffff;
     padding: 0;
     text-decoration: underline;
     font-family: inherit;

@@ -116,8 +116,10 @@
         <div class="flex-container wrap">
             <div class="table-flex">
                 <div class="flex-container table-tr">
-                    <div class="flex-item"><a href="<c:out value="${sortName}"/>"/><fmt:message key="masterName"/></a></div>
-                    <div class="flex-item"><a href="<c:out value="${sortRating}"/>"/><fmt:message key="rating"/></a></div>
+                    <div class="flex-item"><a href="<c:out value="${sortName}"/>"/><fmt:message key="masterName"/></a>
+                    </div>
+                    <div class="flex-item"><a href="<c:out value="${sortRating}"/>"/><fmt:message key="rating"/></a>
+                    </div>
                     <div class="flex-item"><fmt:message key="serviceName"/></div>
                     <div class="flex-item"><fmt:message key="serviceDuration"/></div>
                     <div class="flex-item"><fmt:message key="servicePrice"/></div>
@@ -141,58 +143,64 @@
                 </c:forEach>
             </div>
 
-        <div class="table-flex">
-            <div class="flex-item header">
-                <span><fmt:message key="shelude"/></span>
-            </div>
-        <div class="flex-container wrap" action="/master/edit-appointment" method="post">
-            <c:forEach var="slot" items="${shelude}">
-                <div class="table-flex">
-                    <div class="flex-item table-tr">
-                        <fmt:parseDate value="${slot.key}" pattern="yyyy-MM-dd'T'HH:mm"
-                                       var="parsedDateTime"
-                                       type="both"/>
-                        <fmt:formatDate pattern="dd.MM.yyyy" value="${parsedDateTime}"/>
-                    </div>
-                    <div class="flex-container wrap">
-                        <c:forEach var="slotValue" items="${slot.value}">
-                            <c:choose>
-                                <c:when test="${slotValue.value eq true}">
-                                    <c:forEach var="appointment" items="${appointments}">
-                                        <c:if test="${slotValue.key eq appointment.localDateTime}">
-                                            <div class="flex-item busy">
-                                                <a type="submit" name="settings"
-                                                   onclick="window.location='/master/master-edit-appointment?appointmentId=${appointment.id}&appointmentStatus=${appointment.status}&role=${user.role}'"
-                                                   id="edit">
-                                                    <button class="btn-link" name="dateTime"><fmt:parseDate
-                                                            value="${ slotValue.key }"
-                                                            pattern="yyyy-MM-dd'T'HH:mm"
-                                                            var="parsedDateTime"
-                                                            type="both"/>
-                                                        <fmt:formatDate pattern="HH:mm"
-                                                                        value="${ parsedDateTime }"/></button>
-                                                </a>
-                                            </div>
-                                        </c:if>
-                                    </c:forEach>
-                                </c:when>
-                                <c:when test="${slotValue.value eq false}">
-                                    <div class="flex-item free">
-                                        <fmt:parseDate value="${ slotValue.key }"
-                                                       pattern="yyyy-MM-dd'T'HH:mm"
-                                                       var="parsedDateTime" type="both"/>
-                                        <fmt:formatDate pattern="HH:mm"
-                                                        value="${ parsedDateTime }"/>
-                                    </div>
-                                </c:when>
-                            </c:choose>
-                        </c:forEach>
-                    </div>
+            <div class="table-flex">
+                <div class="flex-item header">
+                    <span><fmt:message key="shelude"/></span>
                 </div>
-            </c:forEach>
-        </div>
+                <div class="flex-container wrap" action="/master/edit-appointment" method="post">
+                    <c:forEach var="slot" items="${shelude}">
+                        <div class="table-flex">
+                            <div class="flex-item table-tr">
+                                <fmt:parseDate value="${slot.key}" pattern="yyyy-MM-dd'T'HH:mm"
+                                               var="parsedDateTime"
+                                               type="both"/>
+                                <fmt:formatDate pattern="dd.MM.yyyy" value="${parsedDateTime}"/>
+                            </div>
+                            <div class="flex-container wrap">
+                                <c:forEach var="slotValue" items="${slot.value}">
+                                    <c:choose>
+                                        <c:when test="${slotValue.value eq true}">
+                                            <c:forEach var="appointment" items="${appointments}">
+                                                <c:if test="${slotValue.key eq appointment.localDateTime}">
+                                                    <div class="flex-item busy">
+
+                                                            <span class="tooltiptext">
+                                                                  <a type="submit" name="settings"
+                                                                     onclick="window.location='/master/master-edit-appointment?appointmentId=${appointment.id}&appointmentStatus=${appointment.status}&role=${user.role}'"
+                                                                     id="edit">
+                                                                    busy
+                                                                  </a>
+                                                            </span>
+                                                            <fmt:parseDate
+                                                                    value="${ slotValue.key }"
+                                                                    pattern="yyyy-MM-dd'T'HH:mm"
+                                                                    var="parsedDateTime"
+                                                                    type="both"/>
+                                                            <fmt:formatDate pattern="HH:mm"
+                                                                            value="${ parsedDateTime }"/>
+                                                    </div>
+                                                </c:if>
+                                            </c:forEach>
+                                        </c:when>
+                                        <c:when test="${slotValue.value eq false}">
+                                            <div class="flex-item free">
+                                                <span class="tooltiptext">free</span>
+
+                                                <fmt:parseDate value="${ slotValue.key }"
+                                                               pattern="yyyy-MM-dd'T'HH:mm"
+                                                               var="parsedDateTime" type="both"/>
+                                                <fmt:formatDate pattern="HH:mm"
+                                                                value="${ parsedDateTime }"/>
+                                            </div>
+                                        </c:when>
+                                    </c:choose>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-</body>
-</html>
+    </body>
+    </html>
