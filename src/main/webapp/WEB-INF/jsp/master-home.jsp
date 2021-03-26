@@ -136,8 +136,7 @@
                         </div>
                     </div>
                 </c:forEach>
-            </table>
-        </div>
+            </div>
 
         <div class="table-flex">
             <div class="flex-item header">
