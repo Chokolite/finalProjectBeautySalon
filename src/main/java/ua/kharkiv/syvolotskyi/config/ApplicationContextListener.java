@@ -44,13 +44,14 @@ public class ApplicationContextListener implements ServletContextListener {
         AppointmentService appointmentService = new AppointmentServiceImpl(transactionManager, appointmentRepository);
         ReviewRepository reviewRepository = new ReviewRepositoryImpl();
         ReviewService reviewService = new ReviewServiceImpl(transactionManager, reviewRepository);
-
+        EmailScheduler emailScheduler = new EmailSchedulerImpl(new EmailSenderImpl(appointmentService.getUsersEmailsForSheduler()));
 
         context.setAttribute(UserService.class.toString(), userService);
         context.setAttribute(ServiceService.class.toString(), serviceService);
         context.setAttribute(CatalogService.class.toString(), catalogService);
         context.setAttribute(AppointmentService.class.toString(), appointmentService);
         context.setAttribute(ReviewService.class.toString(), reviewService);
+        emailScheduler.startScheduler();
     }
 
     private TransactionManager initTransactionManager() {
