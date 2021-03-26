@@ -13,10 +13,10 @@ import java.util.Map;
 
 public class TimeSlots {
     private Long masterId;
-    private LocalDateTime startTime = changeHour(LocalDateTime.now(), 10, 0);
+    private LocalDateTime startTime = changeHour(LocalDateTime.now(), 9, 0);
     private List<Appointment> appointmentListByMasterId = new ArrayList<>();
     private LocalDateTime finishHour = changeHour(startTime, 20, 0);
-    private LocalDateTime finishDay = startTime.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+    private LocalDateTime finishDay = startTime.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
     //Створити мапу Map<Дата, Map<час, Boolean>> map. Дата = день. Час - заповнити годинами починаючи з поточного часу і до finishTime
     private Map<LocalDateTime, Map<LocalDateTime, Boolean>> shelude = new LinkedHashMap<>();
     private List<Appointment> appointmentList;
@@ -75,9 +75,6 @@ public class TimeSlots {
                 if (currentHour.getHour() == al.getLocalDateTime().getHour() && currentHour.getDayOfMonth() == al.getLocalDateTime().getDayOfMonth()) {
                     if(al.getStatus().equals(Status.COMPLETE)){
                         sheludeOfDay.put(currentHour, false);
-                    }
-                    if(!al.getStatus().equals(Status.COMPLETE)){
-                        sheludeOfDay.put(currentHour, true);
                     }
                 }
             }

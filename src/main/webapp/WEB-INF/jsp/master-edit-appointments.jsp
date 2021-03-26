@@ -20,13 +20,14 @@
             <p>
                 <c:if test="${param.appointmentStatus eq 'COMPLETE'}">
                 <span class="fontawesome-file-alt"></span><select disabled name="status" size="1">
-                    <option value="COMPLETE" selected>Complete</option>
+                <option value="COMPLETE" selected>Complete</option>
                 </c:if>
                 <c:if test="${param.appointmentStatus != 'COMPLETE'}">
                 <span class="fontawesome-file-alt"></span><select name="status" size="1">
                 </c:if>
                 <option value="OPEN">Open</option>
                 <option value="CANCELED">Canceled</option>
+                <option value="COMPLETE" selected>Complete</option>
             </select></p>
             <p></p>
 

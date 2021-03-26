@@ -205,7 +205,7 @@ hr {
 .tableInfo{
     margin-left: 20px;
     display:inline-block;
-    width:780px;
+    width:700px;
     vertical-align: top;
     float: right;
     margin-right: 20px;
@@ -369,4 +369,78 @@ img {
 @-webkit-keyframes slideOut{
 	0%{top:-30px; opacity: 0;}
 	100%{top:0px; opacity: 1;}
+}
+
+.flex-container {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.wrap {
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.header{
+    background: #32383C;
+    color: #9c9c9c;
+}
+.flex-item {
+    display: flex;
+    padding: 5px;
+    min-width: 100px;
+    height: 50px;
+    margin: 5px;
+    font-size: 1.0em;
+    border-radius: 5px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.free{
+    background: #b8ffbe;
+    text-decoration-color: #3b4148;
+}
+
+.busy{
+    background: #ffb8b8;
+}
+.table-flex{
+    display: flex;
+    flex-direction: column;
+}
+.table-tr{
+    background: #3f4950;
+    color: #9c9c9c;
+}
+.row-flex {
+    height: 50px;
+    margin: 10px;
+    font-size: 1.3em;
+    border-radius: 5px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.cell-flex{
+    display: flex;
+    min-height: 25px;
+}
+
+.btn-link {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    color: #3b4148;
+    padding: 0;
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: inherit;
 }
