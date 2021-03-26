@@ -117,13 +117,16 @@
             <div class="table-flex">
                 <div class="flex-container table-tr">
                     <div class="flex-item"><a href="<c:out value="${sortName}"/>"/><fmt:message key="masterName"/></a></div>
-                    <div class="flex-item"><a href="<c:out value="${sortRating}"/>"/><fmt:message key="serviceName"/></a></div>
+                    <div class="flex-item"><a href="<c:out value="${sortRating}"/>"/><fmt:message key="rating"/></a></div>
+                    <div class="flex-item"><fmt:message key="serviceName"/></div>
                     <div class="flex-item"><fmt:message key="serviceDuration"/></div>
                     <div class="flex-item"><fmt:message key="servicePrice"/></div>
+                    <div class="flex-item"></div>
                 </div>
                 <c:forEach var="catalog" items="${catalogs}">
                     <div class="flex-container wrap">
                         <div class="flex-item">${catalog.master.name}</div>
+                        <div class="flex-item">${catalog.master.rating}</div>
                         <div class="flex-item">${catalog.service.name}</div>
                         <div class="flex-item">${catalog.service.serviceDuration}</div>
                         <div class="flex-item">${catalog.service.servicePrice}</div>
