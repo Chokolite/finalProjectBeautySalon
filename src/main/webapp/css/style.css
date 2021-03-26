@@ -412,13 +412,7 @@ img {
     color: #9c9c9c;
 }
 .row-flex {
-    height: 50px;
-    margin: 10px;
-    font-size: 1.3em;
-    border-radius: 5px;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
 }
 .cell-flex{
     display: flex;
