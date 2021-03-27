@@ -3,7 +3,6 @@ package ua.kharkiv.syvolotskyi.utils;
 public class JspConstants {
 
     private JspConstants() {
-
     }
 
     public static final String USER_LOGIN_JSP = "/WEB-INF/jsp/login.jsp";
