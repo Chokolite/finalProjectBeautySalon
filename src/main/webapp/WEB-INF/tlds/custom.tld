@@ -1,0 +1,27 @@
+<taglib>
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>2.0</jsp-version>
+    <short-name>custom tag</short-name>
+    <tag>
+        <name>co</name>
+        <tag-class>ua.kharkiv.syvolotskyi.tag.CountPagesTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>catalogSize</name>
+            <type>int</type>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>size</name>
+            <type>int</type>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>var</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+</taglib>

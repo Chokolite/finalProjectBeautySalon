@@ -34,11 +34,14 @@ public class ClientHomeServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String type = request.getParameter("type");
+        String masterName = request.getParameter("masterName");
         int offset = PaginationUtils.getOffset(request);
         int size = PaginationUtils.getSize(request);
+
         List<Catalog> catalogList = catalogService.getAll(name, type, request.getParameter("order"), offset, size);
         List<Appointment> appointmentList = appointmentService.getAll();
         List<Appointment> myAppointments = new ArrayList<>();
+
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         for(Appointment al : appointmentList){
@@ -48,6 +51,8 @@ public class ClientHomeServlet extends HttpServlet {
         }
         request.setAttribute("catalogs", catalogList);
         request.setAttribute("appointments", myAppointments);
+        request.setAttribute("catalogSize", catalogService.getCount(masterName));
+
         request.getRequestDispatcher(JspConstants.HOMEPAGE_CLIENT_JSP).forward(request, response);
     }
 }

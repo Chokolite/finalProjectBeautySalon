@@ -39,6 +39,7 @@ public class AdminHomeServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String type = request.getParameter("type");
+        String masterName = request.getParameter("masterName");
         int offset = PaginationUtils.getOffset(request);
         int size = PaginationUtils.getSize(request);
 
@@ -51,6 +52,7 @@ public class AdminHomeServlet extends HttpServlet {
         request.setAttribute("services", serviceList);
         request.setAttribute("catalogs", catalogList);
         request.setAttribute("appointments", appointmentList);
+        request.setAttribute("catalogSize", catalogService.getCount(masterName));
 
         request.getRequestDispatcher(JspConstants.HOMEPAGE_ADMIN_JSP).forward(request, response);
     }

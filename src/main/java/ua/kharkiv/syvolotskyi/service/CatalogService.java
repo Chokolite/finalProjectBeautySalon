@@ -10,6 +10,8 @@ public interface CatalogService {
 
     Catalog getById(Long id);
 
+    Long getCount(String masterName);
+
     Long save(Catalog catalog);
 
     void delete(Long id);

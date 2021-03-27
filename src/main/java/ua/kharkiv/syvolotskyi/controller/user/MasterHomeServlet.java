@@ -40,6 +40,7 @@ public class MasterHomeServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String type = request.getParameter("type");
+        String masterName = request.getParameter("masterName");
         int offset = PaginationUtils.getOffset(request);
         int size = PaginationUtils.getSize(request);
 
@@ -56,6 +57,7 @@ public class MasterHomeServlet extends HttpServlet {
         request.setAttribute("shelude", shelude);
         request.setAttribute("services", serviceList);
         request.setAttribute("catalogs", catalogList);
+        request.setAttribute("catalogSize", catalogService.getCount(masterName));
 
         request.getRequestDispatcher(JspConstants.HOMEPAGE_MASTER_JSP).forward(request, response);
     }

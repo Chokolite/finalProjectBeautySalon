@@ -113,6 +113,7 @@
                 </c:if>
                 </c:url>
         </div>
+
         <div class="flex-container wrap">
             <div class="table-flex">
                 <div class="flex-container table-tr">
@@ -141,6 +142,31 @@
                     </div>
                 </c:forEach>
             </div>
+            <div class="flex-container" id="pagination">
+                <ex:co catalogSize="${catalogSize}" size="${size}" var="count"/>
+                <c:if test="${size != null}">
+                    <c:forEach var="i" begin="1" end="${count}">
+                        <c:url value="/master/master-home" var="paginationUrl">
+                            <c:if test="${size*i-size != 0}">
+                                <c:param name="offset" value="${size*i-size}"/>
+                            </c:if>
+                            <c:if test="${size != null}">
+                                <c:param name="size" value="${size}"/>
+                            </c:if>
+                            <c:if test="${param.type eq 'masterName'}">
+                                <c:param name="type" value="${catalog.master.name}"/>
+                            </c:if>
+                            <c:if test="${param.type eq 'serviceName'}">
+                                <c:param name="type" value="${catalog.service.name}"/>
+                            </c:if>
+                        </c:url>
+                        <a href='<c:out value="${paginationUrl}"/>'>
+                            <div class="flex-item"> ${i}</div>
+                        </a>
+                    </c:forEach>
+                </c:if>
+            </div>
+        </div>
 
             <div class="table-flex">
                 <div class="flex-item header">

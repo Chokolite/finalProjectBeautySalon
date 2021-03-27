@@ -31,6 +31,9 @@ public class CatalogRepositoryImpl implements CatalogRepository {
     private static final String INSERT_CATALOG = "insert into catalog (masterId, serviceId) values(?, ?)";
     private static final String DELETE_CATALOG = "delete from catalog where id=?";
     private static final String DEFAULT_ORDER = "u.name,ASC";
+    private static final String COUNT_CATALOG = "select COUNT(*) "+
+            "from catalog c "+
+            "    left join users u ON u.id = c.masterId";
 
     @Override
     public List<Catalog> getAll(Connection connection, String name, String type, String orderBy, int offset, int size) throws SQLException {
@@ -61,6 +64,15 @@ public class CatalogRepositoryImpl implements CatalogRepository {
         statement.setLong(1, id);
         ResultSet resultSet = statement.executeQuery();
         return resultSet.next() ? convertResultSetToCatalog(resultSet) : null;
+    }
+
+    @Override
+    public Long getCount(Connection connection, String masterName) throws SQLException {
+        SelectBuilder select = SqlBuilder.select(COUNT_CATALOG);
+        setNameFilter(masterName, select);
+        PreparedStatement statement = select.buildPrepareStatement(connection);
+        ResultSet resultSet = statement.executeQuery();
+        return resultSet.next() ? resultSet.getLong(1) : 0L;
     }
 
     @Override

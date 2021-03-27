@@ -27,6 +27,11 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
+    public Long getCount(String masterName) {
+        return transactionManager.execute(c -> catalogRepository.getCount(c, masterName));
+    }
+
+    @Override
     public Long save(Catalog catalog) {
         return transactionManager.execute(c -> catalogRepository.save(c, catalog));
     }

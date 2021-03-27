@@ -29,7 +29,7 @@
                     <input type="hidden" name="order" value="${param.order}">
                 </c:if>
                 <c:if test="${param.size != null}">
-                    <input type="hidden" name="size" value="${param.size}">
+                    <input type="hidden" name="size" min="1" value="${param.size}">
                 </c:if>
                 <input type="text" name="name" value="${param.masterName}" placeholder="<fmt:message key="search"/>">
                 <select itemtype="text" name="type" size="1">
@@ -49,133 +49,135 @@
                 </c:if>
                 <input type="number" name="size" value="${param.size}" min="1" placeholder="<fmt:message key="size"/>">
             </form>
-            <table style="width: -webkit-fill-available;">
-                <c:url value="/client/client-home" var="sortName">
-                    <c:set var="ascDesc" value="DESC"/>
+            <c:url value="/client/client-home" var="sortName">
+                <c:set var="ascDesc" value="DESC"/>
                 <c:choose>
-                <c:when test="${param.order == 'u.name,ASC'}">
-                    <c:set var="ascDesc" value="DESC"/>
-                </c:when>
-                <c:when test="${param.order == 'u.name,DESC'}">
-                    <c:set var="ascDesc" value="ASC"/>
-                </c:when>
+                    <c:when test="${param.order == 'u.name,ASC'}">
+                        <c:set var="ascDesc" value="DESC"/>
+                    </c:when>
+                    <c:when test="${param.order == 'u.name,DESC'}">
+                        <c:set var="ascDesc" value="ASC"/>
+                    </c:when>
                 </c:choose>
-                    <c:param name="order" value="u.name,${ascDesc}"/>
+                <c:param name="order" value="u.name,${ascDesc}"/>
                 <c:if test="${catalog.master.name != null}">
                     <c:param name="masterName" value="${catalog.master.name}"/>
                 </c:if>
-                </c:url>
+            </c:url>
 
-                <c:url value="/client/client-home" var="sortRating">
-                    <c:set var="ascDesc" value="ASC"/>
+            <c:url value="/client/client-home" var="sortRating">
+                <c:set var="ascDesc" value="ASC"/>
                 <c:choose>
-                <c:when test="${param.order == 'avg_rating,ASC'}">
-                    <c:set var="ascDesc" value="DESC"/>
-                </c:when>
-                <c:when test="${param.order == 'avg_rating,DESC'}">
-                    <c:set var="ascDesc" value="ASC"/>
-                </c:when>
+                    <c:when test="${param.order == 'avg_rating,ASC'}">
+                        <c:set var="ascDesc" value="DESC"/>
+                    </c:when>
+                    <c:when test="${param.order == 'avg_rating,DESC'}">
+                        <c:set var="ascDesc" value="ASC"/>
+                    </c:when>
                 </c:choose>
-                    <c:param name="order" value="avg_rating,${ascDesc}"/>
+                <c:param name="order" value="avg_rating,${ascDesc}"/>
                 <c:if test="${param.masterName != null}">
                     <c:param name="masterName" value="${catalog.master.name}"/>
                 </c:if>
-                </c:url>
+            </c:url>
         </div>
         <div class="flex-container wrap">
             <div class="table-flex">
                 <div class="flex-container table-tr">
                     <div class="flex-item"><a href="<c:out value="${sortName}"/>"/><fmt:message key="masterName"/></a>
                     </div>
-                    <div class="flex-item"><a href="<c:out value="${sortRating}"/>"/><fmt:message key="rating"/></a></div>
+                    <div class="flex-item"><a href="<c:out value="${sortRating}"/>"/><fmt:message key="rating"/></a>
+                    </div>
                     <div class="flex-item"><fmt:message key="serviceName"/></div>
-                <div class="flex-item"><fmt:message key="serviceDuration"/></div>
-                <div class="flex-item"><fmt:message key="servicePrice"/></div>
-            </div>
-            <c:forEach var="catalog" items="${catalogs}">
-                <div class="flex-container wrap">
-                    <div class="flex-item">${catalog.master.name}</div>
-                    <div class="flex-item">${catalog.master.rating}</div>
-                    <div class="flex-item">${catalog.service.name}</div>
-                    <div class="flex-item">${catalog.service.serviceDuration}</div>
-                    <div class="flex-item">${catalog.service.servicePrice}</div>
-                    <div class="flex-item">
-                        <a type="submit" name="check"
-                           onclick="window.location='/client/create-appointment?catalogId=${catalog.id}&clientId=${user.id}&serviceName=${catalog.service.name}&role=${user.role}';
-                                   return false"
-                           id="edit">
-                            <i class="fa fa-check" aria-hidden="true"></i>
-                        </a>
-                    </div>
+                    <div class="flex-item"><fmt:message key="serviceDuration"/></div>
+                    <div class="flex-item"><fmt:message key="servicePrice"/></div>
                 </div>
-            </c:forEach>
-        </div>
-    </div>
-
-    <div class="table-flex">
-        <div class="flex-item header">
-            <span><fmt:message key="appointments"/></span>
-        </div>
-    </div>
-    <div class="flex-container wrap">
-        <div class="table-flex">
-            <div class="flex-container table-tr">
-                <div class="flex-item"><fmt:message key="serviceName"/></div>
-                <div class="flex-item"><fmt:message key="masterName"/></div>
-                <div class="flex-item"><fmt:message key="date"/></div>
-                <div class="flex-item"><fmt:message key="status"/></div>
-            </div>
-            <c:forEach var="appointment" items="${appointments}">
-                <div class="flex-container wrap">
-                    <div class="flex-item">${appointment.catalog.service.name}</div>
-                    <div class="flex-item">${appointment.catalog.master.name}</div>
-                    <div class="flex-item"><fmt:parseDate value="${ appointment.localDateTime }"
-                                                          pattern="yyyy-MM-dd'T'HH:mm"
-                                                          var="parsedDateTime" type="both"/>
-                        <fmt:formatDate pattern="dd.MM.yyyy HH:mm"
-                                        value="${ parsedDateTime }"/></div>
-                    <div class="flex-item">${appointment.status}</div>
-                    <div class="flex-item">
-                        <c:if test="${appointment.status eq 'COMPLETE'}">
-                            <c:if test="${appointment.reviewId < 1}">
-                                <a type="submit" name="check"
-                                   onclick="window.location='/client/create-review?appointmentId=${appointment.id}&clientId=${user.id}';
-                                           return false"
-                                   id="edit">
-                                    <i class="fa fa-comment" aria-hidden="true"></i>
-                                </a>
-                            </c:if>
-                        </c:if>
+                <c:forEach var="catalog" items="${catalogs}">
+                    <div class="flex-container wrap">
+                        <div class="flex-item">${catalog.master.name}</div>
+                        <div class="flex-item">${catalog.master.rating}</div>
+                        <div class="flex-item">${catalog.service.name}</div>
+                        <div class="flex-item">${catalog.service.serviceDuration}</div>
+                        <div class="flex-item">${catalog.service.servicePrice}</div>
+                        <div class="flex-item">
+                            <a type="submit" name="check"
+                               onclick="window.location='/client/create-appointment?catalogId=${catalog.id}&clientId=${user.id}&serviceName=${catalog.service.name}&role=${user.role}';
+                                       return false"
+                               id="edit">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
-            </c:forEach>
-        </div>
-    </div>
-</div>
-</div>
-
-<div id="pagination">
-    <c:if test="${size != null}">
-        <c:forEach var="i" begin="1" end="${count}">
-            <c:url value="/client/client-home" var="paginationUrl">
-                <c:if test="${size*i-size != 0}">
-                    <c:param name="offset" value="${size*i-size}"/>
-                </c:if>
+                </c:forEach>
+            </div>
+            <div class="flex-container" id="pagination">
+                <ex:co catalogSize="${catalogSize}" size="${size}" var="count"/>
                 <c:if test="${size != null}">
-                    <c:param name="size" value="${size}"/>
+                    <c:forEach var="i" begin="1" end="${count}">
+                        <c:url value="/client/client-home" var="paginationUrl">
+                            <c:if test="${size*i-size != 0}">
+                                <c:param name="offset" value="${size*i-size}"/>
+                            </c:if>
+                            <c:if test="${size != null}">
+                                <c:param name="size" value="${size}"/>
+                            </c:if>
+                            <c:if test="${param.type eq 'masterName'}">
+                                <c:param name="type" value="${catalog.master.name}"/>
+                            </c:if>
+                            <c:if test="${param.type eq 'serviceName'}">
+                                <c:param name="type" value="${catalog.service.name}"/>
+                            </c:if>
+                        </c:url>
+                        <a href='<c:out value="${paginationUrl}"/>'>
+                            <div class="flex-item"> ${i}</div>
+                        </a>
+                    </c:forEach>
                 </c:if>
-                <c:if test="${param.type != null}">
-                    <c:param name="type" value="${catalog.master.name}"/>
-                </c:if>
-                <c:if test="${param.serviceName != null}">
-                    <c:param name="type" value="${catalog.service.name}"/>
-                </c:if>
-            </c:url>
-            <a href='<c:out value="${paginationUrl}" />'>${i}</a>
-        </c:forEach>
-    </c:if>
-</div>
+            </div>
+        </div>
 
+
+        <div class="table-flex">
+            <div class="flex-item header">
+                <span><fmt:message key="appointments"/></span>
+            </div>
+        </div>
+        <div class="flex-container wrap">
+            <div class="table-flex">
+                <div class="flex-container table-tr">
+                    <div class="flex-item"><fmt:message key="serviceName"/></div>
+                    <div class="flex-item"><fmt:message key="masterName"/></div>
+                    <div class="flex-item"><fmt:message key="date"/></div>
+                    <div class="flex-item"><fmt:message key="status"/></div>
+                </div>
+                <c:forEach var="appointment" items="${appointments}">
+                    <div class="flex-container wrap">
+                        <div class="flex-item">${appointment.catalog.service.name}</div>
+                        <div class="flex-item">${appointment.catalog.master.name}</div>
+                        <div class="flex-item"><fmt:parseDate value="${ appointment.localDateTime }"
+                                                              pattern="yyyy-MM-dd'T'HH:mm"
+                                                              var="parsedDateTime" type="both"/>
+                            <fmt:formatDate pattern="dd.MM.yyyy HH:mm"
+                                            value="${ parsedDateTime }"/></div>
+                        <div class="flex-item">${appointment.status}</div>
+                        <div class="flex-item">
+                            <c:if test="${appointment.status eq 'COMPLETE'}">
+                                <c:if test="${appointment.reviewId < 1}">
+                                    <a type="submit" name="check"
+                                       onclick="window.location='/client/create-review?appointmentId=${appointment.id}&clientId=${user.id}';
+                                               return false"
+                                       id="edit">
+                                        <i class="fa fa-comment" aria-hidden="true"></i>
+                                    </a>
+                                </c:if>
+                            </c:if>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 </body>
 </html>

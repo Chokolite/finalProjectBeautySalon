@@ -11,6 +11,8 @@ public interface CatalogRepository {
 
     Catalog getById(Connection connection, Long id) throws SQLException;
 
+    Long getCount(Connection connection, String masterName) throws SQLException;
+
     Long save(Connection connection, Catalog catalog) throws SQLException;
 
     void delete(Connection connection, Long id) throws SQLException;
