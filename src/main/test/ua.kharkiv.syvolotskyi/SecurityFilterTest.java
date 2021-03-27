@@ -21,17 +21,18 @@ public class SecurityFilterTest {
         SecurityFilter securityFilter = new SecurityFilter();
         FilterChain mockChain = mock(FilterChain.class);
         HttpServletRequest mockRequest = mock(HttpServletRequest.class);
+        HttpServletResponse mockResponse = mock(HttpServletResponse.class);
         HttpSession mockSession = mock(HttpSession.class);
         User mockUser = mock(User.class);
 
-        when(mockRequest.getServletPath()).thenReturn("/admin/some-path");
+        when(mockRequest.getServletPath()).thenReturn("/admin/admin-home");
         when(mockRequest.getSession()).thenReturn(mockSession);
         when(mockSession.getAttribute("user")).thenReturn(mockUser);
         when(mockUser.getRole()).thenReturn(Role.ADMIN);
 
-        securityFilter.doFilter(mockRequest, null, mockChain);
+        securityFilter.doFilter(mockRequest, mockResponse, mockChain);
 
-        verify(mockChain).doFilter(mockRequest, null);
+        verify(mockChain).doFilter(mockRequest, mockResponse);
     }
 
     @Test
@@ -43,7 +44,7 @@ public class SecurityFilterTest {
         HttpSession mockSession = mock(HttpSession.class);
         User mockUser = mock(User.class);
 
-        when(mockRequest.getServletPath()).thenReturn("/student/some-path");
+        when(mockRequest.getServletPath()).thenReturn("/master/master-home");
         when(mockRequest.getSession()).thenReturn(mockSession);
         when(mockSession.getAttribute("user")).thenReturn(mockUser);
         when(mockUser.getRole()).thenReturn(Role.ADMIN);
