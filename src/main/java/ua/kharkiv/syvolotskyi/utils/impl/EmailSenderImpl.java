@@ -58,8 +58,8 @@ public class EmailSenderImpl implements EmailSender {
 
     private void initProperties() {
         properties = new Properties();
-        try {
-            properties.load(new FileReader("C:\\Users\\ymomo\\IdeaProjects\\FinalProjectBeautySalon\\src\\main\\resources\\smtp.properties"));
+        try (FileReader fileReader = new FileReader("C:\\Users\\ymomo\\IdeaProjects\\FinalProjectBeautySalon\\src\\main\\resources\\smtp.properties")){
+            properties.load(fileReader);
         } catch (IOException e) {
             LOG.error(e);
         }
