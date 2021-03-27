@@ -15,10 +15,6 @@ import java.util.List;
 public class UserRepositoryImpl implements UserRepository {
     private static final String SELECT_USER_BY_ID = "select * from users where id =?";
     private static final String SELECT_ALL = "select * from users";
-    private static final String SELECT_ALL_DRIVERS = "select dr.enabled dr_enabled, dr.id dr_id, dr.name dr_name," +
-            " dr.email dr_email where dr.role='DRIVER'";
-    private static final String SELECT_ALL_DISPATCHERS = "select di.enabled di_enabled, di.id u_id, di.name di_name," +
-            " di.email u_email where di.role='DISPATCHER'";
     private static final String SELECT_USER_BY_EMAIL_AND_PASSWORD = "select * from users where email = ? and password = ?";
     private static final String INSERT_USER = "insert into users (name, password, email, role) values(?,?,?,?)";
     private static final String UPDATE_USER = "update users set name=?, password=?, email=? where id=?";
@@ -134,7 +130,7 @@ public class UserRepositoryImpl implements UserRepository {
         statement.setString(count++, user.getName());
         statement.setString(count++, user.getPassword());
         statement.setString(count++, user.getEmail());
-        statement.setString(count++, user.getRole().name());
+        statement.setString(count, user.getRole().name());
     }
 
     private void setAttributeForUpdate(User user, PreparedStatement statement) throws SQLException {

@@ -12,8 +12,6 @@ public class CountPagesTag extends SimpleTagSupport {
         this.var = var;
     }
 
-    private int count;
-
     public void setSize(int size) {
         this.size = size;
     }
@@ -22,8 +20,9 @@ public class CountPagesTag extends SimpleTagSupport {
         this.catalogSize = catalogSize;
     }
 
+    @Override
     public void doTag() {
-        count = catalogSize / size + ((catalogSize % size) > 0 ? 1 : 0);
+        int count = catalogSize / size + ((catalogSize % size) > 0 ? 1 : 0);
         getJspContext().setAttribute(var, count);
     }
 }

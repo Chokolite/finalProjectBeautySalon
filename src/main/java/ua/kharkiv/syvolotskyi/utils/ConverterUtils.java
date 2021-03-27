@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 
 public class ConverterUtils {
 
+    private ConverterUtils() {}
+
     public static Service convertRequestToService(HttpServletRequest request) {
         Service service = new Service();
         String name = request.getParameter("serviceName");

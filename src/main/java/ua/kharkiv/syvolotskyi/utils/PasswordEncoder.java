@@ -1,13 +1,18 @@
 package ua.kharkiv.syvolotskyi.utils;
 
 
+import org.apache.log4j.Logger;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class PasswordEncoder {
+    private static final Logger LOG = Logger.getLogger(PasswordEncoder.class);
 
     private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
     private static final String ALGORITHM = "MD5";
+
+    private PasswordEncoder() {}
 
     public static String encode(String password) {
         try {
@@ -16,7 +21,7 @@ public class PasswordEncoder {
             byte[] hash = digest.digest();
             return bytesToHex(hash);
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            LOG.error(e);
         }
         return null;
     }

@@ -2,7 +2,6 @@ package ua.kharkiv.syvolotskyi.controller.managment;
 
 import ua.kharkiv.syvolotskyi.service.AppointmentService;
 import ua.kharkiv.syvolotskyi.service.ReviewService;
-import ua.kharkiv.syvolotskyi.service.UserService;
 import ua.kharkiv.syvolotskyi.utils.ConverterUtils;
 import ua.kharkiv.syvolotskyi.utils.JspConstants;
 

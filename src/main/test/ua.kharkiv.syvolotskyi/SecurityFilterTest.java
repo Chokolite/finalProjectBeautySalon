@@ -36,6 +36,44 @@ public class SecurityFilterTest {
     }
 
     @Test
+    public void test_on_check_master_positive_doFilter() throws IOException, ServletException {
+        SecurityFilter securityFilter = new SecurityFilter();
+        FilterChain mockChain = mock(FilterChain.class);
+        HttpServletRequest mockRequest = mock(HttpServletRequest.class);
+        HttpServletResponse mockResponse = mock(HttpServletResponse.class);
+        HttpSession mockSession = mock(HttpSession.class);
+        User mockUser = mock(User.class);
+
+        when(mockRequest.getServletPath()).thenReturn("/master/master-home");
+        when(mockRequest.getSession()).thenReturn(mockSession);
+        when(mockSession.getAttribute("user")).thenReturn(mockUser);
+        when(mockUser.getRole()).thenReturn(Role.MASTER);
+
+        securityFilter.doFilter(mockRequest, mockResponse, mockChain);
+
+        verify(mockChain).doFilter(mockRequest, mockResponse);
+    }
+
+    @Test
+    public void test_on_check_client_positive_doFilter() throws IOException, ServletException {
+        SecurityFilter securityFilter = new SecurityFilter();
+        FilterChain mockChain = mock(FilterChain.class);
+        HttpServletRequest mockRequest = mock(HttpServletRequest.class);
+        HttpServletResponse mockResponse = mock(HttpServletResponse.class);
+        HttpSession mockSession = mock(HttpSession.class);
+        User mockUser = mock(User.class);
+
+        when(mockRequest.getServletPath()).thenReturn("/client/client-home");
+        when(mockRequest.getSession()).thenReturn(mockSession);
+        when(mockSession.getAttribute("user")).thenReturn(mockUser);
+        when(mockUser.getRole()).thenReturn(Role.CLIENT);
+
+        securityFilter.doFilter(mockRequest, mockResponse, mockChain);
+
+        verify(mockChain).doFilter(mockRequest, mockResponse);
+    }
+
+    @Test
     public void test_on_check_admin_negative_doFilter() throws IOException, ServletException {
         SecurityFilter securityFilter = new SecurityFilter();
         FilterChain mockChain = mock(FilterChain.class);
