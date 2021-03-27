@@ -17,7 +17,7 @@ public class TimeSlots {
     private List<Appointment> appointmentListByMasterId = new ArrayList<>();
     private LocalDateTime finishHour = changeHour(startTime, 20, 0);
     private LocalDateTime finishDay = startTime.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
-    //Створити мапу Map<Дата, Map<час, Boolean>> map. Дата = день. Час - заповнити годинами починаючи з поточного часу і до finishTime
+    //Creatind map Map<data, Map<time, Boolean>> map. data = day. time - filing with hours started from startTime and finished with finishTime
     private Map<LocalDateTime, Map<LocalDateTime, Boolean>> shelude = new LinkedHashMap<>();
     private List<Appointment> appointmentList;
 
@@ -32,12 +32,12 @@ public class TimeSlots {
         this.appointmentList = appointmentList;
     }
 
-    //Створюю мапу із датами починаючи з сьогодні і по пятницю, false = free slot
+    //Creating map started from today and finished in friday, false = free slot
     public Map<LocalDateTime, Map<LocalDateTime, Boolean>> createShelude() {
         createAppointmentLocalDateTimeListByMasterId();
         for (; startTime.getDayOfMonth() <= finishDay.getDayOfMonth(); startTime = startTime.plusDays(1)) {
             shelude.put(startTime, fillSheludeOfDay(startTime, finishHour, appointmentListByMasterId));
-        }  //порівнюю getDayOfMonth в мапі з appointmentDate.getDayOfMonth if equals => value=true(busy)
+        }  //compare getDayOfMonth in the map with appointmentDate.getDayOfMonth if equals => value=true(busy)
         for (Map.Entry<LocalDateTime, Map<LocalDateTime, Boolean>> m : shelude.entrySet()) {
             for (Appointment al : appointmentListByMasterId) {
                 if(!al.getStatus().equals(Status.COMPLETE)) {
