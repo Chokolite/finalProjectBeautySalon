@@ -167,7 +167,6 @@
                     <input type="number" name="size" value="${param.size}" min="1"
                            placeholder="<fmt:message key="size"/>">
                 </form>
-                <table style="width: -webkit-fill-available;">
                     <c:url value="/admin/admin-home" var="sortName">
                         <c:set var="ascDesc" value="DESC"/>
                     <c:choose>

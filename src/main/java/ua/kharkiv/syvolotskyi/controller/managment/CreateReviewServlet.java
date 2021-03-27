@@ -1,10 +1,10 @@
 package ua.kharkiv.syvolotskyi.controller.managment;
 
-import ua.kharkiv.syvolotskyi.utils.ConverterUtils;
-import ua.kharkiv.syvolotskyi.utils.JspConstants;
 import ua.kharkiv.syvolotskyi.service.AppointmentService;
 import ua.kharkiv.syvolotskyi.service.ReviewService;
 import ua.kharkiv.syvolotskyi.service.UserService;
+import ua.kharkiv.syvolotskyi.utils.ConverterUtils;
+import ua.kharkiv.syvolotskyi.utils.JspConstants;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -18,13 +18,11 @@ import java.io.IOException;
 public class CreateReviewServlet extends HttpServlet {
     private ReviewService reviewService;
     private AppointmentService appointmentService;
-    private UserService userService;
 
     @Override
     public void init(ServletConfig config) {
         reviewService = (ReviewService) config.getServletContext().getAttribute(ReviewService.class.toString());
         appointmentService = (AppointmentService) config.getServletContext().getAttribute(AppointmentService.class.toString());
-        userService = (UserService) config.getServletContext().getAttribute(UserService.class.toString());
     }
 
     @Override
@@ -32,6 +30,7 @@ public class CreateReviewServlet extends HttpServlet {
         request.getRequestDispatcher(JspConstants.CREATE_REVIEW_JSP).forward(request, response);
     }
 
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Long reviewId = reviewService.save(ConverterUtils.convertRequestToReview(request));
         appointmentService.saveReview(Long.valueOf(request.getParameter("appointmentId")), reviewId);

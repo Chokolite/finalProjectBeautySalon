@@ -4,8 +4,6 @@ public class Catalog extends Entity{
     private Master master;
     private Service service;
 
-    public Catalog() {}
-
     public Master getMaster() {
         return master;
     }

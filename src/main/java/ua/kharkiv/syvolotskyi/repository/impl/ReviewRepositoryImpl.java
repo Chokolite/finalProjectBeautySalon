@@ -19,7 +19,7 @@ public class ReviewRepositoryImpl implements ReviewRepository {
         while (resultSet.next()) {
             reviewList.add(convertResultsetToReview(resultSet));
         }
-        return null;
+        return reviewList;
     }
 
     @Override

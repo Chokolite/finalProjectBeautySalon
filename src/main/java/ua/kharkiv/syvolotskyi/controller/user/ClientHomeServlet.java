@@ -42,7 +42,7 @@ public class ClientHomeServlet extends HttpServlet {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         for(Appointment al : appointmentList){
-            if(al.getClient().getId() == user.getId()){
+            if(al.getClient().getId() != null && al.getClient().getId().equals(user.getId())){
                 myAppointments.add(al);
             }
         }

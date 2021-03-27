@@ -123,7 +123,6 @@
                     <div class="flex-item"><fmt:message key="serviceName"/></div>
                     <div class="flex-item"><fmt:message key="serviceDuration"/></div>
                     <div class="flex-item"><fmt:message key="servicePrice"/></div>
-                    <div class="flex-item"></div>
                 </div>
                 <c:forEach var="catalog" items="${catalogs}">
                     <div class="flex-container wrap">

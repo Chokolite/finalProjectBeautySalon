@@ -46,7 +46,6 @@
                 </c:if>
                 <input type="number" name="size" value="${param.size}" min="1" placeholder="<fmt:message key="size"/>">
             </form>
-            <table style="width: -webkit-fill-available;">
                 <c:url value="/guest/guest-home" var="sortName">
                     <c:set var="ascDesc" value="DESC"/>
                 <c:choose>

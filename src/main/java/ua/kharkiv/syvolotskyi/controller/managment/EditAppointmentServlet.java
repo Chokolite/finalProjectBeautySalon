@@ -1,10 +1,9 @@
 package ua.kharkiv.syvolotskyi.controller.managment;
 
-import ua.kharkiv.syvolotskyi.utils.ConverterUtils;
-import ua.kharkiv.syvolotskyi.utils.JspConstants;
 import ua.kharkiv.syvolotskyi.entity.Appointment;
 import ua.kharkiv.syvolotskyi.service.AppointmentService;
-import ua.kharkiv.syvolotskyi.service.UserService;
+import ua.kharkiv.syvolotskyi.utils.ConverterUtils;
+import ua.kharkiv.syvolotskyi.utils.JspConstants;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -17,12 +16,10 @@ import java.io.IOException;
 @WebServlet("/admin/edit-appointment")
 public class EditAppointmentServlet extends HttpServlet {
     private AppointmentService appointmentService;
-    private UserService userService;
 
     @Override
     public void init(ServletConfig config) {
         appointmentService = (AppointmentService) config.getServletContext().getAttribute(AppointmentService.class.toString());
-        userService = (UserService) config.getServletContext().getAttribute(UserService.class.toString());
     }
 
     @Override

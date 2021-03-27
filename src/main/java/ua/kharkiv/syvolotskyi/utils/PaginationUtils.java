@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 public class PaginationUtils {
     private static final int DEFAULT_SIZE = 10;
 
+    private PaginationUtils() {
+    }
+
     public static int getOffset(HttpServletRequest request) {
         if (StringUtils.isNumeric(request.getParameter("offset"))) {
             int offset = Integer.parseInt(request.getParameter("offset"));

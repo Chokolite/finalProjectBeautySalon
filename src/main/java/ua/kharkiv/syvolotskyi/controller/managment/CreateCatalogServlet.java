@@ -26,7 +26,6 @@ public class CreateCatalogServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         catalogService.save(ConverterUtils.convertRequestToCatalog(request));
-        System.out.println(request.getParameter("masterId"));
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if(Role.ADMIN.equals(user.getRole())) {
