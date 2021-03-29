@@ -170,10 +170,10 @@
 
             <div class="table-flex">
                 <div class="flex-item header">
-                    <span><fmt:message key="shelude"/></span>
+                    <span><fmt:message key="schedule"/></span>
                 </div>
                 <div class="flex-container wrap" action="/master/edit-appointment" method="post">
-                    <c:forEach var="slot" items="${shelude}">
+                    <c:forEach var="slot" items="${schedule}">
                         <div class="table-flex">
                             <div class="flex-item table-tr">
                                 <fmt:parseDate value="${slot.key}" pattern="yyyy-MM-dd'T'HH:mm"

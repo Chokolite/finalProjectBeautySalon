@@ -2,7 +2,7 @@ package ua.kharkiv.syvolotskyi.controller.managment;
 
 import ua.kharkiv.syvolotskyi.utils.ConverterUtils;
 import ua.kharkiv.syvolotskyi.utils.JspConstants;
-import ua.kharkiv.syvolotskyi.utils.TimeSlots;
+import ua.kharkiv.syvolotskyi.utils.impl.TimeSlotsImpl;
 import ua.kharkiv.syvolotskyi.entity.Appointment;
 import ua.kharkiv.syvolotskyi.entity.Role;
 import ua.kharkiv.syvolotskyi.entity.User;
@@ -38,10 +38,10 @@ public class CreateAppointmentServlet extends HttpServlet {
         request.setAttribute("appointments", appointmentList);
 
         Long masterId = catalogService.getById(Long.valueOf(request.getParameter("catalogId"))).getMaster().getId();
-        TimeSlots timeSlots = new TimeSlots(appointmentList, masterId);
-        Map<LocalDateTime, Map<LocalDateTime, Boolean>> shelude = timeSlots.createShelude();
+        TimeSlotsImpl timeSlots = new TimeSlotsImpl();
+        Map<LocalDateTime, Map<LocalDateTime, Boolean>> schedule = timeSlots.createShelude(appointmentList, masterId);
 
-        request.setAttribute("shelude", shelude);
+        request.setAttribute("schedule", schedule);
         request.getRequestDispatcher(JspConstants.CREATE_APPOINTMENT_JSP).forward(request, response);
     }
 

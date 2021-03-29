@@ -2,7 +2,7 @@ package ua.kharkiv.syvolotskyi.controller.user;
 
 import ua.kharkiv.syvolotskyi.utils.JspConstants;
 import ua.kharkiv.syvolotskyi.utils.PaginationUtils;
-import ua.kharkiv.syvolotskyi.utils.TimeSlots;
+import ua.kharkiv.syvolotskyi.utils.impl.TimeSlotsImpl;
 import ua.kharkiv.syvolotskyi.entity.Appointment;
 import ua.kharkiv.syvolotskyi.entity.Catalog;
 import ua.kharkiv.syvolotskyi.entity.Service;
@@ -50,11 +50,11 @@ public class MasterHomeServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        TimeSlots timeSlots = new TimeSlots(appointmentList, user.getId());
-        Map<LocalDateTime, Map<LocalDateTime, Boolean>> shelude = timeSlots.createShelude();
+        TimeSlotsImpl timeSlots = new TimeSlotsImpl();
+        Map<LocalDateTime, Map<LocalDateTime, Boolean>> schedule = timeSlots.createShelude(appointmentList, user.getId());
 
         request.setAttribute("appointments", appointmentList);
-        request.setAttribute("shelude", shelude);
+        request.setAttribute("schedule", schedule);
         request.setAttribute("services", serviceList);
         request.setAttribute("catalogs", catalogList);
         request.setAttribute("catalogSize", catalogService.getCount(masterName));

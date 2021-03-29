@@ -21,7 +21,7 @@
             <input type="hidden" name="catalogId" value="${param.catalogId}"/>
             <input type="hidden" name="clientId" value="${param.clientId}"/>
             <div class="flex-container wrap" action="/client/create-appointment" method="post">
-                <c:forEach var="slot" items="${shelude}">
+                <c:forEach var="slot" items="${schedule}">
                     <div class="table-flex">
                         <div class="flex-item table-tr">
                             <fmt:parseDate value="${slot.key}" pattern="yyyy-MM-dd'T'HH:mm"
