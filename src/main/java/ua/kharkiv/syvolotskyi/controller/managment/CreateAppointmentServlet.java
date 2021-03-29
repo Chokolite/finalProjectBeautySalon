@@ -39,7 +39,7 @@ public class CreateAppointmentServlet extends HttpServlet {
 
         Long masterId = catalogService.getById(Long.valueOf(request.getParameter("catalogId"))).getMaster().getId();
         TimeSlotsImpl timeSlots = new TimeSlotsImpl();
-        Map<LocalDateTime, Map<LocalDateTime, Boolean>> schedule = timeSlots.createShelude(appointmentList, masterId);
+        Map<LocalDateTime, Map<LocalDateTime, Boolean>> schedule = timeSlots.createSchedule(appointmentList, masterId);
 
         request.setAttribute("schedule", schedule);
         request.getRequestDispatcher(JspConstants.CREATE_APPOINTMENT_JSP).forward(request, response);

@@ -51,7 +51,7 @@ public class MasterHomeServlet extends HttpServlet {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         TimeSlotsImpl timeSlots = new TimeSlotsImpl();
-        Map<LocalDateTime, Map<LocalDateTime, Boolean>> schedule = timeSlots.createShelude(appointmentList, user.getId());
+        Map<LocalDateTime, Map<LocalDateTime, Boolean>> schedule = timeSlots.createSchedule(appointmentList, user.getId());
 
         request.setAttribute("appointments", appointmentList);
         request.setAttribute("schedule", schedule);

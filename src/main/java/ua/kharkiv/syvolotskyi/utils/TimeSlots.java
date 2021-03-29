@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface TimeSlots {
-    Map<LocalDateTime, Map<LocalDateTime, Boolean>> createShelude(List<Appointment> appointmentList, Long masterId);
+    Map<LocalDateTime, Map<LocalDateTime, Boolean>> createSchedule(List<Appointment> appointmentList, Long masterId);
 }

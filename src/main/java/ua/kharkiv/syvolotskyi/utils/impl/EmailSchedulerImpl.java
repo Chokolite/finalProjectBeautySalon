@@ -22,13 +22,15 @@ public class EmailSchedulerImpl implements EmailScheduler {
     @Override
     public void startScheduler() {
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
-        scheduledExecutorService.scheduleAtFixedRate(emailSender::notifyUsersAboutFeedback, getInitialDelayToEndOfTheDay(), PERIOD, TimeUnit.SECONDS);
+        scheduledExecutorService.scheduleAtFixedRate(emailSender::notifyUsersAboutFeedback,
+                                                     getInitialDelayToEndOfTheDay(), PERIOD, TimeUnit.SECONDS);
     }
 
     private long getInitialDelayToEndOfTheDay() {
         ZonedDateTime tomorrowMidnight = ZonedDateTime.now(ZoneOffset.UTC)
                 .plusDays(1)
                 .truncatedTo(ChronoUnit.DAYS);
-        return ChronoUnit.SECONDS.between(ZonedDateTime.now(ZoneOffset.UTC), tomorrowMidnight);
+        return ChronoUnit.SECONDS
+                .between(ZonedDateTime.now(ZoneOffset.UTC), tomorrowMidnight);
     }
 }

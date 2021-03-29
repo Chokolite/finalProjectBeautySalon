@@ -16,31 +16,36 @@ public class TimeSlotsImpl implements TimeSlots {
     private List<Appointment> appointmentListByMasterId = new ArrayList<>();
     private LocalDateTime finishHour = changeHour(startTime, 20, 0);
     private LocalDateTime finishDay = startTime.with(TemporalAdjusters.lastDayOfMonth());
-    //Creatind map Map<data, Map<time, Boolean>> map. data = day. time - filing with hours started from startTime and finished with finishTime
-    private Map<LocalDateTime, Map<LocalDateTime, Boolean>> shelude = new LinkedHashMap<>();
+    //Map<data, Map<time, Boolean>> map. data = day. time - filing with hours
+    // started from startTime and finished with finishTime
+    private Map<LocalDateTime, Map<LocalDateTime, Boolean>> schedule = new LinkedHashMap<>();
 
 
     //Creating map started from today and finished in last day of month, false = free slot
     @Override
-    public Map<LocalDateTime, Map<LocalDateTime, Boolean>> createShelude(List<Appointment> appointmentList, Long masterId) {
+    public Map<LocalDateTime, Map<LocalDateTime, Boolean>> createSchedule(List<Appointment> appointmentList, Long masterId) {
         createAppointmentLocalDateTimeListByMasterId(appointmentList, masterId);
         for (; startTime.getDayOfMonth() <= finishDay.getDayOfMonth(); startTime = startTime.plusDays(1)) {
-            shelude.put(startTime, fillSheludeOfDay(startTime, finishHour, appointmentListByMasterId));
+            schedule.put(startTime,
+                    fillScheduleOfDay(startTime, finishHour,
+                            appointmentListByMasterId));
             if (startTime.getDayOfMonth() == finishDay.getDayOfMonth()) {
                 break;
             }
         }  //compare getDayOfMonth in the map with appointmentDate.getDayOfMonth if equals => value=true(busy)
-        shelude.forEach((key, value) -> appointmentListByMasterId.forEach(al -> {
+        schedule.forEach((key, value) -> appointmentListByMasterId.forEach(al -> {
             if (!al.getStatus().equals(Status.COMPLETE)) {
-                if (al.getLocalDateTime().getDayOfMonth() == key.getDayOfMonth() && al.getLocalDateTime().getHour() == key.getHour()) {
-                    shelude.put(key, value);
+                if (al.getLocalDateTime().getDayOfMonth() == key.getDayOfMonth() &&
+                        al.getLocalDateTime().getHour() == key.getHour()) {
+                    schedule.put(key, value);
                 }
             }
         }));
-        return shelude;
+        return schedule;
     }
 
-    private void createAppointmentLocalDateTimeListByMasterId(List<Appointment> appointmentList, Long masterId) {
+    private void createAppointmentLocalDateTimeListByMasterId(List<Appointment> appointmentList,
+                                                              Long masterId) {
         appointmentList.forEach(ap -> {
             if (ap.getCatalog().getMaster().getId().equals(masterId)) {
                 appointmentListByMasterId.add(ap);
@@ -48,30 +53,33 @@ public class TimeSlotsImpl implements TimeSlots {
         });
     }
 
-    private static LocalDateTime changeHour(LocalDateTime currentTime, int hour, int minute) {
+    private static LocalDateTime changeHour(LocalDateTime currentTime,
+                                            int hour, int minute) {
         return currentTime.toLocalDate().atTime(hour, minute);
     }
 
-    private static Map<LocalDateTime, Boolean> fillSheludeOfDay(LocalDateTime currentHour, LocalDateTime finishHour, List<Appointment> appointmentList) {
-        Map<LocalDateTime, Boolean> sheludeOfDay = new LinkedHashMap<>();
+    private static Map<LocalDateTime, Boolean> fillScheduleOfDay(LocalDateTime currentHour,
+                                                                 LocalDateTime finishHour,
+                                                                 List<Appointment> appointmentList) {
+        Map<LocalDateTime, Boolean> scheduleOfDay = new LinkedHashMap<>();
         LocalDateTime originCurrentHour = currentHour;
 
         for (; currentHour.getHour() <= finishHour.getHour(); currentHour = currentHour.plusHours(1)) {
-            sheludeOfDay.put(currentHour, false);
+            scheduleOfDay.put(currentHour, false);
         }
 
         currentHour = originCurrentHour; //reset variable
 
         for (Appointment al : appointmentList) {
             for (; currentHour.getHour() <= finishHour.getHour(); currentHour = currentHour.plusHours(1)) {
-                if (currentHour.getMonthValue() == al.getLocalDateTime().getMonthValue()) {
-                    if (currentHour.getHour() == al.getLocalDateTime().getHour() && currentHour.getDayOfMonth() == al.getLocalDateTime().getDayOfMonth()) {
-                        sheludeOfDay.put(currentHour, true);
-                    }
+                if (currentHour.getMonthValue() == al.getLocalDateTime().getMonthValue() &&
+                        currentHour.getHour() == al.getLocalDateTime().getHour() &&
+                        currentHour.getDayOfMonth() == al.getLocalDateTime().getDayOfMonth()) {
+                    scheduleOfDay.put(currentHour, true);
                 }
             }
             currentHour = originCurrentHour;
         }
-        return sheludeOfDay;
+        return scheduleOfDay;
     }
 }
