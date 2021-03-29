@@ -56,7 +56,7 @@ public class ApplicationContextListener implements ServletContextListener {
 
     private TransactionManager initTransactionManager() {
         try {
-            DataSource dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/mydb"); ///node JNDI tree for jdbc
+            DataSource dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/mydb");
             return new TransactionManagerImpl(dataSource);
         } catch (NamingException e) {
             throw new RuntimeException("data source cant init");

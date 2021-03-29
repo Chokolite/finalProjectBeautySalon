@@ -25,7 +25,6 @@ public interface    UserRepository {
 
     boolean existsByEmail(Connection connection, String email) throws SQLException;
 
-
     boolean isEnabledById(Connection c, Long id) throws SQLException;
 
     void updateEnabled(Connection c, Long id, boolean b) throws SQLException;

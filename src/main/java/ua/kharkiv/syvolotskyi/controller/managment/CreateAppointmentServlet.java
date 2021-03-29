@@ -1,13 +1,13 @@
 package ua.kharkiv.syvolotskyi.controller.managment;
 
-import ua.kharkiv.syvolotskyi.utils.ConverterUtils;
-import ua.kharkiv.syvolotskyi.utils.JspConstants;
-import ua.kharkiv.syvolotskyi.utils.impl.TimeSlotsImpl;
 import ua.kharkiv.syvolotskyi.entity.Appointment;
 import ua.kharkiv.syvolotskyi.entity.Role;
 import ua.kharkiv.syvolotskyi.entity.User;
 import ua.kharkiv.syvolotskyi.service.AppointmentService;
 import ua.kharkiv.syvolotskyi.service.CatalogService;
+import ua.kharkiv.syvolotskyi.utils.ConverterUtils;
+import ua.kharkiv.syvolotskyi.utils.JspConstants;
+import ua.kharkiv.syvolotskyi.utils.impl.TimeSlotsImpl;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -54,12 +54,8 @@ public class CreateAppointmentServlet extends HttpServlet {
         if(Role.ADMIN.equals(user.getRole())){
             response.sendRedirect("/admin/admin-home");
         }
-        if(Role.MASTER.equals(user.getRole())){
-            response.sendRedirect("/master/master-home");
-        }
         if(Role.CLIENT.equals(user.getRole())) {
             response.sendRedirect("/client/client-home");
         }
     }
 }
-
