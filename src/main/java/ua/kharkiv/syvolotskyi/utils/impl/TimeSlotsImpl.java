@@ -20,34 +20,32 @@ public class TimeSlotsImpl implements TimeSlots {
     private Map<LocalDateTime, Map<LocalDateTime, Boolean>> shelude = new LinkedHashMap<>();
 
 
-    //Creating map started from today and finished in friday, false = free slot
+    //Creating map started from today and finished in last day of month, false = free slot
     @Override
     public Map<LocalDateTime, Map<LocalDateTime, Boolean>> createShelude(List<Appointment> appointmentList, Long masterId) {
         createAppointmentLocalDateTimeListByMasterId(appointmentList, masterId);
         for (; startTime.getDayOfMonth() <= finishDay.getDayOfMonth(); startTime = startTime.plusDays(1)) {
             shelude.put(startTime, fillSheludeOfDay(startTime, finishHour, appointmentListByMasterId));
-            if(startTime.getDayOfMonth() == finishDay.getDayOfMonth()){
+            if (startTime.getDayOfMonth() == finishDay.getDayOfMonth()) {
                 break;
             }
         }  //compare getDayOfMonth in the map with appointmentDate.getDayOfMonth if equals => value=true(busy)
-        for (Map.Entry<LocalDateTime, Map<LocalDateTime, Boolean>> m : shelude.entrySet()) {
-            for (Appointment al : appointmentListByMasterId) {
-                if(!al.getStatus().equals(Status.COMPLETE)) {
-                    if (al.getLocalDateTime().getDayOfMonth() == m.getKey().getDayOfMonth() && al.getLocalDateTime().getHour() == m.getKey().getHour()) {
-                        shelude.put(m.getKey(), m.getValue());
-                    }
+        shelude.forEach((key, value) -> appointmentListByMasterId.forEach(al -> {
+            if (!al.getStatus().equals(Status.COMPLETE)) {
+                if (al.getLocalDateTime().getDayOfMonth() == key.getDayOfMonth() && al.getLocalDateTime().getHour() == key.getHour()) {
+                    shelude.put(key, value);
                 }
             }
-        }
+        }));
         return shelude;
     }
 
     private void createAppointmentLocalDateTimeListByMasterId(List<Appointment> appointmentList, Long masterId) {
-        for(Appointment ap : appointmentList){
-            if(ap.getCatalog().getMaster().getId().equals(masterId)){
+        appointmentList.forEach(ap -> {
+            if (ap.getCatalog().getMaster().getId().equals(masterId)) {
                 appointmentListByMasterId.add(ap);
             }
-        }
+        });
     }
 
     private static LocalDateTime changeHour(LocalDateTime currentTime, int hour, int minute) {
@@ -66,7 +64,7 @@ public class TimeSlotsImpl implements TimeSlots {
 
         for (Appointment al : appointmentList) {
             for (; currentHour.getHour() <= finishHour.getHour(); currentHour = currentHour.plusHours(1)) {
-                if(currentHour.getMonthValue() == al.getLocalDateTime().getMonthValue()) {
+                if (currentHour.getMonthValue() == al.getLocalDateTime().getMonthValue()) {
                     if (currentHour.getHour() == al.getLocalDateTime().getHour() && currentHour.getDayOfMonth() == al.getLocalDateTime().getDayOfMonth()) {
                         sheludeOfDay.put(currentHour, true);
                     }
