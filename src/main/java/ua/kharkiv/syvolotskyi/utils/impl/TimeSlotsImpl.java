@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Fetching yesterday's emails and generate map with time slots for easier drawing on jsp
+ * Getting emails and generate map with time slots for a specific master for easier drawing on jsp
  */
 public class TimeSlotsImpl implements TimeSlots {
     private LocalDateTime startTime = changeHour(LocalDateTime.now(), 9, 0);
