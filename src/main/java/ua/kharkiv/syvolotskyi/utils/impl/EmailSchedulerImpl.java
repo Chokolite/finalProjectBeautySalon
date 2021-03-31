@@ -10,6 +10,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * scheduledExecutorService starts EmailSender with a one day delay
+ */
 public class EmailSchedulerImpl implements EmailScheduler {
 
     private static final long PERIOD = ChronoUnit.DAYS.getDuration().getSeconds();

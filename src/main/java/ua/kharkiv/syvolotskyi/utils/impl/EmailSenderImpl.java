@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * Takes parameters from a properties file(smtp.properties) and sends letters on mails from the list
+ */
 public class EmailSenderImpl implements EmailSender {
     private static final Logger LOG = Logger.getLogger(EmailSenderImpl.class);
     private final Authenticator authenticator;
