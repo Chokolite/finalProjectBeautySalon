@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 public class ApplicationContextListener implements ServletContextListener {
 
     private static final Logger LOGGER = Logger.getLogger(ApplicationContextListener.class);
-    EmailScheduler emailScheduler;
+    private EmailScheduler emailScheduler;
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         LOGGER.debug("context init start");
