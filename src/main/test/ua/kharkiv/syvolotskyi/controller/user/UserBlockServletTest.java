@@ -2,18 +2,13 @@ package ua.kharkiv.syvolotskyi.controller.user;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.kharkiv.syvolotskyi.controller.managment.EditAppointmentByMasterServlet;
-import ua.kharkiv.syvolotskyi.utils.JspConstants;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.verify;
 
 public class UserBlockServletTest {
     private HttpServletRequest request;

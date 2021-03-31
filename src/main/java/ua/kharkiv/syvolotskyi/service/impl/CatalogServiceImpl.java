@@ -15,7 +15,6 @@ public class CatalogServiceImpl implements CatalogService {
         this.transactionManager = transactionManager;
         this.catalogRepository = catalogRepository;
     }
-
     @Override
     public List<Catalog> getAll(String name, String type, String orderBy, int offset, int size) {
         return transactionManager.execute(c -> catalogRepository.getAll(c, name, type, orderBy, offset, size));
