@@ -11,6 +11,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Fetching yesterday's emails and generate map with time slots for easier drawing on jsp
+ */
 public class TimeSlotsImpl implements TimeSlots {
     private LocalDateTime startTime = changeHour(LocalDateTime.now(), 9, 0);
     private List<Appointment> appointmentListByMasterId = new ArrayList<>();
@@ -55,8 +58,7 @@ public class TimeSlotsImpl implements TimeSlots {
         return currentTime.toLocalDate().atTime(hour, minute);
     }
 
-    private static Map<LocalDateTime, Boolean> fillScheduleOfDay(LocalDateTime currentHour,
-                                                                 LocalDateTime finishHour,
+    private static Map<LocalDateTime, Boolean> fillScheduleOfDay(LocalDateTime currentHour, LocalDateTime finishHour,
                                                                  List<Appointment> appointmentList) {
         Map<LocalDateTime, Boolean> scheduleOfDay = new LinkedHashMap<>();
         LocalDateTime originCurrentHour = currentHour;
