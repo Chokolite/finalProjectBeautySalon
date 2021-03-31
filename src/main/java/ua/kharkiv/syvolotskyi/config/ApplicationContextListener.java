@@ -8,6 +8,7 @@ import ua.kharkiv.syvolotskyi.service.impl.*;
 import ua.kharkiv.syvolotskyi.transaction.TransactionManager;
 import ua.kharkiv.syvolotskyi.transaction.impl.TransactionManagerImpl;
 import ua.kharkiv.syvolotskyi.utils.EmailScheduler;
+import ua.kharkiv.syvolotskyi.utils.EmailSender;
 import ua.kharkiv.syvolotskyi.utils.impl.EmailSchedulerImpl;
 import ua.kharkiv.syvolotskyi.utils.impl.EmailSenderImpl;
 
@@ -22,7 +23,7 @@ import javax.sql.DataSource;
 public class ApplicationContextListener implements ServletContextListener {
 
     private static final Logger LOGGER = Logger.getLogger(ApplicationContextListener.class);
-
+    EmailScheduler emailScheduler;
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         LOGGER.debug("context init start");
@@ -44,7 +45,8 @@ public class ApplicationContextListener implements ServletContextListener {
         AppointmentService appointmentService = new AppointmentServiceImpl(transactionManager, appointmentRepository);
         ReviewRepository reviewRepository = new ReviewRepositoryImpl();
         ReviewService reviewService = new ReviewServiceImpl(transactionManager, reviewRepository);
-        EmailScheduler emailScheduler = new EmailSchedulerImpl(new EmailSenderImpl(appointmentService.getUsersEmailsForSheduler()));
+        EmailSender emailSender = new EmailSenderImpl(appointmentService.getUsersEmailsForSheduler());
+        emailScheduler = new EmailSchedulerImpl(emailSender);
 
         context.setAttribute(UserService.class.toString(), userService);
         context.setAttribute(ServiceService.class.toString(), serviceService);
@@ -65,6 +67,6 @@ public class ApplicationContextListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-
+        emailScheduler.stopScheduler();
     }
 }

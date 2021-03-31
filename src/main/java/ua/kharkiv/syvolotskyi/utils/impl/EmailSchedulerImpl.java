@@ -1,6 +1,7 @@
 package ua.kharkiv.syvolotskyi.utils.impl;
 
 import ua.kharkiv.syvolotskyi.utils.EmailScheduler;
+import ua.kharkiv.syvolotskyi.utils.EmailSender;
 
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -12,18 +13,23 @@ import java.util.concurrent.TimeUnit;
 public class EmailSchedulerImpl implements EmailScheduler {
 
     private static final long PERIOD = ChronoUnit.DAYS.getDuration().getSeconds();
+    private ScheduledExecutorService scheduledExecutorService;
+    private final EmailSender emailSender;
 
-    private final EmailSenderImpl emailSender;
-
-    public EmailSchedulerImpl(EmailSenderImpl emailSender) {
+    public EmailSchedulerImpl(EmailSender emailSender) {
         this.emailSender = emailSender;
     }
 
     @Override
     public void startScheduler() {
-        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+        scheduledExecutorService = Executors.newScheduledThreadPool(1);
         scheduledExecutorService.scheduleAtFixedRate(emailSender::notifyUsersAboutFeedback,
-                                                     getInitialDelayToEndOfTheDay(), PERIOD, TimeUnit.SECONDS);
+                getInitialDelayToEndOfTheDay(), PERIOD, TimeUnit.SECONDS);
+    }
+
+    @Override
+    public void stopScheduler() {
+        scheduledExecutorService.shutdown();
     }
 
     private long getInitialDelayToEndOfTheDay() {
