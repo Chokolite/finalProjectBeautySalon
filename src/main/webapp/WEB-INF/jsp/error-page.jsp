@@ -12,14 +12,14 @@
             <a href="/login"><fmt:message key="signin"/></a>
         </c:when>
         <c:when test="${errorPage == 403}">
-            <c:if test="${user.role eq 'DISPATCHER'}">
-                <a href="/dispatcher/dispatcher-home"><fmt:message key="homepage"/></a>
+            <c:if test="${user.role eq 'CLIENT'}">
+                <a href="/client/client-home"><fmt:message key="homepage"/></a>
             </c:if>
             <c:if test="${user.role eq 'ADMIN'}">
                 <a href="/admin/admin-home"><fmt:message key="homepage"/></a>
             </c:if>
-            <c:if test="${user.role eq 'DRIVER'}">
-                <a href="/user/driver-home"><fmt:message key="homepage"/> </a>
+            <c:if test="${user.role eq 'MASTER'}">
+                <a href="/master/master-home"><fmt:message key="homepage"/> </a>
             </c:if>
         </c:when>
         <c:when test="${errorPage == 404}">
