@@ -27,12 +27,12 @@ public class GuestHomeServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String type = request.getParameter("type");
+        String masterName = request.getParameter("masterName");
         int offset = PaginationUtils.getOffset(request);
         int size = PaginationUtils.getSize(request);
-        if (name != null) {
-            List<Catalog> catalogList = catalogService.getAll(name, type, request.getParameter("order"), offset, size);
-            request.setAttribute("catalogs", catalogList);
-        }
+        List<Catalog> catalogList = catalogService.getAll(name, type, request.getParameter("order"), offset, size);
+        request.setAttribute("catalogs", catalogList);
+        request.setAttribute("catalogSize", catalogService.getCount(masterName));
         request.getRequestDispatcher(JspConstants.HOMEPAGE_GUEST_JSP).forward(request, response);
     }
 }

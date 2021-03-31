@@ -25,7 +25,7 @@ public class ClientHomeServlet extends HttpServlet {
     private AppointmentService appointmentService;
 
     @Override
-    public void init(ServletConfig config){
+    public void init(ServletConfig config) {
         catalogService = (CatalogService) config.getServletContext().getAttribute(CatalogService.class.toString());
         appointmentService = (AppointmentService) config.getServletContext().getAttribute(AppointmentService.class.toString());
     }
@@ -38,23 +38,21 @@ public class ClientHomeServlet extends HttpServlet {
         int offset = PaginationUtils.getOffset(request);
         int size = PaginationUtils.getSize(request);
 
-        if(name != null) {
-            List<Catalog> catalogList = catalogService.getAll(name, type, request.getParameter("order"), offset, size);
-            List<Appointment> appointmentList = appointmentService.getAll();
-            List<Appointment> myAppointments = new ArrayList<>();
+        List<Catalog> catalogList = catalogService.getAll(name, type, request.getParameter("order"), offset, size);
+        List<Appointment> appointmentList = appointmentService.getAll();
+        List<Appointment> myAppointments = new ArrayList<>();
 
-            HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
-            for (Appointment al : appointmentList) {
-                if (al.getClient().getId() != null && al.getClient().getId().equals(user.getId())) {
-                    myAppointments.add(al);
-                }
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        for (Appointment al : appointmentList) {
+            if (al.getClient().getId() != null && al.getClient().getId().equals(user.getId())) {
+                myAppointments.add(al);
             }
-            request.setAttribute("catalogs", catalogList);
-            request.setAttribute("appointments", myAppointments);
-            request.setAttribute("catalogSize", catalogService.getCount(masterName));
-
         }
+        request.setAttribute("catalogs", catalogList);
+        request.setAttribute("appointments", myAppointments);
+        request.setAttribute("catalogSize", catalogService.getCount(masterName));
+
         request.getRequestDispatcher(JspConstants.HOMEPAGE_CLIENT_JSP).forward(request, response);
     }
 }

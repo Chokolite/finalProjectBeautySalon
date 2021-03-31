@@ -44,22 +44,20 @@ public class MasterHomeServlet extends HttpServlet {
         int offset = PaginationUtils.getOffset(request);
         int size = PaginationUtils.getSize(request);
 
-        if (name != null) {
-            List<Catalog> catalogList = catalogService.getAll(name, type, request.getParameter("order"), offset, size);
-            List<Appointment> appointmentList = appointmentService.getAll();
-            List<Service> serviceList = serviceService.getAll();
+        List<Catalog> catalogList = catalogService.getAll(name, type, request.getParameter("order"), offset, size);
+        List<Appointment> appointmentList = appointmentService.getAll();
+        List<Service> serviceList = serviceService.getAll();
 
-            HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
-            TimeSlotsImpl timeSlots = new TimeSlotsImpl();
-            Map<LocalDateTime, Map<LocalDateTime, Boolean>> schedule = timeSlots.createSchedule(appointmentList, user.getId());
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        TimeSlotsImpl timeSlots = new TimeSlotsImpl();
+        Map<LocalDateTime, Map<LocalDateTime, Boolean>> schedule = timeSlots.createSchedule(appointmentList, user.getId());
 
-            request.setAttribute("appointments", appointmentList);
-            request.setAttribute("schedule", schedule);
-            request.setAttribute("services", serviceList);
-            request.setAttribute("catalogs", catalogList);
-            request.setAttribute("catalogSize", catalogService.getCount(masterName));
-        }
+        request.setAttribute("appointments", appointmentList);
+        request.setAttribute("schedule", schedule);
+        request.setAttribute("services", serviceList);
+        request.setAttribute("catalogs", catalogList);
+        request.setAttribute("catalogSize", catalogService.getCount(masterName));
 
         request.getRequestDispatcher(JspConstants.HOMEPAGE_MASTER_JSP).forward(request, response);
     }
