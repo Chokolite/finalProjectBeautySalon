@@ -51,7 +51,7 @@ public class AppointmentRepositoryImpl implements AppointmentRepository {
     }
 
     @Override
-    public Appointment getById(Connection connection, Long id) throws SQLException {
+    public Appointment getById  (Connection connection, Long id) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SELECT_APPOINTMENT_BY_ID);
         statement.setLong(1, id);
         ResultSet resultSet = statement.executeQuery();

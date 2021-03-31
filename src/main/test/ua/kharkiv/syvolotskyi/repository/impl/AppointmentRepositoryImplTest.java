@@ -50,4 +50,12 @@ public class AppointmentRepositoryImplTest {
         assertEquals(email, appointmentRepository.getUsersEmailsForSheduler(connection));
     }
 
+    @Test
+    public void getById() throws SQLException {
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeQuery()).thenReturn(resultSet);
+        when(resultSet.next()).thenReturn(false);
+        assertNull(appointmentRepository.getById(connection, 1L));
+    }
+
 }
