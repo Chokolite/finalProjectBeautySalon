@@ -31,8 +31,10 @@ public class CreateReviewServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Long reviewId = reviewService.save(ConverterUtils.convertRequestToReview(request));
-        appointmentService.saveReview(Long.valueOf(request.getParameter("appointmentId")), reviewId);
+        if (reviewService != null && appointmentService != null) {
+            Long reviewId = reviewService.save(ConverterUtils.convertRequestToReview(request));
+            appointmentService.saveReview(Long.valueOf(request.getParameter("appointmentId")), reviewId);
+        }
         response.sendRedirect("/client/client-home");
     }
 }

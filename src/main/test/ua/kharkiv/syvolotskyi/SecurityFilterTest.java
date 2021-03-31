@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 public class SecurityFilterTest {
 
     @Test
-    public void test_on_check_admin_positive_doFilter() throws IOException, ServletException {
+    public void testOnCheckAdminPositiveDoFilter() throws IOException, ServletException {
         SecurityFilter securityFilter = new SecurityFilter();
         FilterChain mockChain = mock(FilterChain.class);
         HttpServletRequest mockRequest = mock(HttpServletRequest.class);
@@ -36,7 +36,7 @@ public class SecurityFilterTest {
     }
 
     @Test
-    public void test_on_check_master_positive_doFilter() throws IOException, ServletException {
+    public void testOnCheckMasterPositiveDoFilter() throws IOException, ServletException {
         SecurityFilter securityFilter = new SecurityFilter();
         FilterChain mockChain = mock(FilterChain.class);
         HttpServletRequest mockRequest = mock(HttpServletRequest.class);
@@ -55,7 +55,7 @@ public class SecurityFilterTest {
     }
 
     @Test
-    public void test_on_check_client_positive_doFilter() throws IOException, ServletException {
+    public void testOnCheckClienPositiveDoFilter() throws IOException, ServletException {
         SecurityFilter securityFilter = new SecurityFilter();
         FilterChain mockChain = mock(FilterChain.class);
         HttpServletRequest mockRequest = mock(HttpServletRequest.class);
@@ -74,7 +74,7 @@ public class SecurityFilterTest {
     }
 
     @Test
-    public void test_on_check_admin_negative_doFilter() throws IOException, ServletException {
+    public void testOnCheckAdminNegativeDoFilter() throws IOException, ServletException {
         SecurityFilter securityFilter = new SecurityFilter();
         FilterChain mockChain = mock(FilterChain.class);
         HttpServletRequest mockRequest = mock(HttpServletRequest.class);

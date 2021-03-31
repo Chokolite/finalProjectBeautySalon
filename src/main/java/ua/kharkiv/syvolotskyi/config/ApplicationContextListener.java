@@ -1,15 +1,15 @@
 package ua.kharkiv.syvolotskyi.config;
 
 import org.apache.log4j.Logger;
-import ua.kharkiv.syvolotskyi.utils.EmailScheduler;
-import ua.kharkiv.syvolotskyi.utils.impl.EmailSchedulerImpl;
-import ua.kharkiv.syvolotskyi.utils.impl.EmailSenderImpl;
 import ua.kharkiv.syvolotskyi.repository.*;
 import ua.kharkiv.syvolotskyi.repository.impl.*;
 import ua.kharkiv.syvolotskyi.service.*;
 import ua.kharkiv.syvolotskyi.service.impl.*;
 import ua.kharkiv.syvolotskyi.transaction.TransactionManager;
 import ua.kharkiv.syvolotskyi.transaction.impl.TransactionManagerImpl;
+import ua.kharkiv.syvolotskyi.utils.EmailScheduler;
+import ua.kharkiv.syvolotskyi.utils.impl.EmailSchedulerImpl;
+import ua.kharkiv.syvolotskyi.utils.impl.EmailSenderImpl;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;

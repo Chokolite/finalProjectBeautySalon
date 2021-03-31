@@ -23,7 +23,9 @@ public class UserBlockServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Long id = Long.valueOf(req.getParameter("userId"));
         Boolean enabled = Boolean.valueOf(req.getParameter("enabled"));
-        userService.updateEnabled(id, enabled);
+        if (userService != null) {
+            userService.updateEnabled(id, enabled);
+        }
         resp.sendRedirect("/admin/admin-home");
     }
 }

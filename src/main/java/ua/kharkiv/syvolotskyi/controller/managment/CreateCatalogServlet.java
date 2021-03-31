@@ -25,13 +25,15 @@ public class CreateCatalogServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        catalogService.save(ConverterUtils.convertRequestToCatalog(request));
+        if (catalogService != null) {
+            catalogService.save(ConverterUtils.convertRequestToCatalog(request));
+        }
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        if(Role.ADMIN.equals(user.getRole())) {
+        if (Role.ADMIN.equals(user.getRole())) {
             response.sendRedirect("/admin/admin-home");
         }
-        if(Role.MASTER.equals(user.getRole())) {
+        if (Role.MASTER.equals(user.getRole())) {
             response.sendRedirect("/master/master-home");
         }
     }

@@ -34,14 +34,15 @@ public class CreateAppointmentServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        List<Appointment> appointmentList = appointmentService.getAll();
-        request.setAttribute("appointments", appointmentList);
+        if (appointmentService != null && catalogService != null) {
+            List<Appointment> appointmentList = appointmentService.getAll();
+            request.setAttribute("appointments", appointmentList);
+            Long masterId = catalogService.getById(Long.valueOf(request.getParameter("catalogId"))).getMaster().getId();
+            TimeSlotsImpl timeSlots = new TimeSlotsImpl();
+            Map<LocalDateTime, Map<LocalDateTime, Boolean>> schedule = timeSlots.createSchedule(appointmentList, masterId);
+            request.setAttribute("schedule", schedule);
+        }
 
-        Long masterId = catalogService.getById(Long.valueOf(request.getParameter("catalogId"))).getMaster().getId();
-        TimeSlotsImpl timeSlots = new TimeSlotsImpl();
-        Map<LocalDateTime, Map<LocalDateTime, Boolean>> schedule = timeSlots.createSchedule(appointmentList, masterId);
-
-        request.setAttribute("schedule", schedule);
         request.getRequestDispatcher(JspConstants.CREATE_APPOINTMENT_JSP).forward(request, response);
     }
 
@@ -51,10 +52,10 @@ public class CreateAppointmentServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
         Appointment appointment = ConverterUtils.convertRequestToAppointment(request);
         appointmentService.save(appointment);
-        if(Role.ADMIN.equals(user.getRole())){
+        if (Role.ADMIN.equals(user.getRole())) {
             response.sendRedirect("/admin/admin-home");
         }
-        if(Role.CLIENT.equals(user.getRole())) {
+        if (Role.CLIENT.equals(user.getRole())) {
             response.sendRedirect("/client/client-home");
         }
     }

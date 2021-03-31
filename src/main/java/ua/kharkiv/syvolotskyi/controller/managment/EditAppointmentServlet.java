@@ -24,15 +24,19 @@ public class EditAppointmentServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Appointment appointment = appointmentService.getById(Long.parseLong(request.getParameter("appointmentId")));
-        request.setAttribute("appointment", appointment);
+        if (appointmentService != null) {
+            Appointment appointment = appointmentService.getById(Long.parseLong(request.getParameter("appointmentId")));
+            request.setAttribute("appointment", appointment);
+        }
         request.getRequestDispatcher(JspConstants.EDIT_APPOINTMENTS_JSP).forward(request, response);
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Appointment appointment = ConverterUtils.convertRequestToAppointment(request);
-        appointmentService.update(appointment);
+        if (appointmentService != null) {
+            Appointment appointment = ConverterUtils.convertRequestToAppointment(request);
+            appointmentService.update(appointment);
+        }
         response.sendRedirect("/admin/admin-home");
     }
 }

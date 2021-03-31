@@ -43,16 +43,18 @@ public class AdminHomeServlet extends HttpServlet {
         int offset = PaginationUtils.getOffset(request);
         int size = PaginationUtils.getSize(request);
 
-        List<Catalog> catalogList = catalogService.getAll(name, type, request.getParameter("order"), offset, size);
-        List<User> userList = userService.getAll();
-        List<Service> serviceList = serviceService.getAll();
-        List<Appointment> appointmentList = appointmentService.getAll();
+        if (name != null) {
+            List<Catalog> catalogList = catalogService.getAll(name, type, request.getParameter("order"), offset, size);
+            List<User> userList = userService.getAll();
+            List<Service> serviceList = serviceService.getAll();
+            List<Appointment> appointmentList = appointmentService.getAll();
 
-        request.setAttribute("users", userList);
-        request.setAttribute("services", serviceList);
-        request.setAttribute("catalogs", catalogList);
-        request.setAttribute("appointments", appointmentList);
-        request.setAttribute("catalogSize", catalogService.getCount(masterName));
+            request.setAttribute("users", userList);
+            request.setAttribute("services", serviceList);
+            request.setAttribute("catalogs", catalogList);
+            request.setAttribute("appointments", appointmentList);
+            request.setAttribute("catalogSize", catalogService.getCount(masterName));
+        }
 
         request.getRequestDispatcher(JspConstants.HOMEPAGE_ADMIN_JSP).forward(request, response);
     }

@@ -26,9 +26,7 @@ public class TimeSlotsImpl implements TimeSlots {
     public Map<LocalDateTime, Map<LocalDateTime, Boolean>> createSchedule(List<Appointment> appointmentList, Long masterId) {
         createAppointmentLocalDateTimeListByMasterId(appointmentList, masterId);
         for (; startTime.getDayOfMonth() <= finishDay.getDayOfMonth(); startTime = startTime.plusDays(1)) {
-            schedule.put(startTime,
-                    fillScheduleOfDay(startTime, finishHour,
-                            appointmentListByMasterId));
+            schedule.put(startTime, fillScheduleOfDay(startTime, finishHour, appointmentListByMasterId));
             if (startTime.getDayOfMonth() == finishDay.getDayOfMonth()) {
                 break;
             }
@@ -53,8 +51,7 @@ public class TimeSlotsImpl implements TimeSlots {
         });
     }
 
-    private static LocalDateTime changeHour(LocalDateTime currentTime,
-                                            int hour, int minute) {
+    private static LocalDateTime changeHour(LocalDateTime currentTime, int hour, int minute) {
         return currentTime.toLocalDate().atTime(hour, minute);
     }
 

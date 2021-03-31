@@ -19,7 +19,7 @@ public class GuestHomeServlet extends HttpServlet {
     private CatalogService catalogService;
 
     @Override
-    public void init(ServletConfig config){
+    public void init(ServletConfig config) {
         catalogService = (CatalogService) config.getServletContext().getAttribute(CatalogService.class.toString());
     }
 
@@ -29,8 +29,10 @@ public class GuestHomeServlet extends HttpServlet {
         String type = request.getParameter("type");
         int offset = PaginationUtils.getOffset(request);
         int size = PaginationUtils.getSize(request);
-        List<Catalog> catalogList = catalogService.getAll(name, type, request.getParameter("order"), offset, size);
-        request.setAttribute("catalogs", catalogList);
+        if (name != null) {
+            List<Catalog> catalogList = catalogService.getAll(name, type, request.getParameter("order"), offset, size);
+            request.setAttribute("catalogs", catalogList);
+        }
         request.getRequestDispatcher(JspConstants.HOMEPAGE_GUEST_JSP).forward(request, response);
     }
 }

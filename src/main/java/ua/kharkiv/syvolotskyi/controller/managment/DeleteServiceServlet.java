@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @WebServlet("/admin/delete-service")
 public class DeleteServiceServlet extends HttpServlet {
-    ServiceService serviceService;
+    private ServiceService serviceService;
 
     @Override
     public void init(ServletConfig config) {
@@ -21,9 +21,10 @@ public class DeleteServiceServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Service service = serviceService.getById(Long.valueOf(request.getParameter("id")));
-        serviceService.delete(service.getId());
-
+        if (serviceService != null) {
+            Service service = serviceService.getById(Long.valueOf(request.getParameter("id")));
+            serviceService.delete(service.getId());
+        }
         response.sendRedirect("/admin/admin-home");
     }
 

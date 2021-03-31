@@ -26,19 +26,21 @@ public class DeleteCatalogServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        Catalog catalog = catalogService.getById(Long.valueOf(request.getParameter("id")));
+        if (catalogService != null) {
+            Catalog catalog = catalogService.getById(Long.valueOf(request.getParameter("id")));
 
-        if(Role.ADMIN.equals(user.getRole())) {
-            catalogService.delete(catalog.getId());
-        }
-        if(catalog.getMaster().getId().equals(user.getId())) {
-            catalogService.delete(catalog.getId());
+            if (Role.ADMIN.equals(user.getRole())) {
+                catalogService.delete(catalog.getId());
+            }
+            if (catalog.getMaster().getId().equals(user.getId())) {
+                catalogService.delete(catalog.getId());
+            }
         }
 
-        if(Role.ADMIN.equals(user.getRole())) {
+        if (Role.ADMIN.equals(user.getRole())) {
             response.sendRedirect("/admin/admin-home");
         }
-        if(Role.MASTER.equals(user.getRole())){
+        if (Role.MASTER.equals(user.getRole())) {
             response.sendRedirect("/master/master-home");
         }
     }

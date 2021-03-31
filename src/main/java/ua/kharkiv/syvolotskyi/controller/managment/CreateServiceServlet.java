@@ -28,8 +28,9 @@ public class CreateServiceServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        serviceService.save(ConverterUtils.convertRequestToService(request));
-
+        if (serviceService != null) {
+            serviceService.save(ConverterUtils.convertRequestToService(request));
+        }
         response.sendRedirect("/admin/admin-home");
     }
 }

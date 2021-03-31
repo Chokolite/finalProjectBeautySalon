@@ -33,7 +33,7 @@ public class CreateUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Role role = Role.valueOf(request.getParameter("role"));
-        if (userService.existsByEmail(request.getParameter("email"))) {
+        if (userService != null && userService.existsByEmail(request.getParameter("email"))) {
             ValidationException.builder().put("emailError", ValidationEnum.EMAIL_EXISTS).throwIfErrorExists();
         }
         if(Role.CLIENT.equals(role)){
